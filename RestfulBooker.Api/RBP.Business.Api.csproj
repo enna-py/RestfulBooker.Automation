@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestfulBooker.Core\RestfulBooker.Core.csproj" />
-    <ProjectReference Include="..\RestfulBooker.Data\RestfulBooker.Data.csproj" />
+    <ProjectReference Include="..\RestfulBooker.Core\RBP.Core.csproj" />
+    <ProjectReference Include="..\RestfulBooker.Data\RBP.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

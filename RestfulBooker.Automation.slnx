@@ -1,10 +1,21 @@
 <Solution>
+  <Folder Name="/config/">
+    <File Path="RestfulBooker.Tests/appsettings.json" />
+    <File Path="RestfulBooker.Tests/appsettings.local.json" />
+    <File Path="RestfulBooker.Tests/ReportPortal.config.json" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="RestfulBooker.Api/RestfulBooker.Api.csproj" />
-  <Project Path="RestfulBooker.Core/RestfulBooker.Core.csproj" />
-  <Project Path="RestfulBooker.Data/RestfulBooker.Data.csproj" />
-  <Project Path="RestfulBooker.Tests/RestfulBooker.Tests.csproj" />
-  <Project Path="RestfulBooker.UI/RestfulBooker.UI.csproj" />
+  <Folder Name="/src/">
+    <Project Path="RBP.Business.Ui/RBP.Business.Ui.csproj" Id="f7a88bd7-1e2a-4419-8362-845d670ab90f" />
+    <Project Path="RestfulBooker.Api/RBP.Business.Api.csproj" />
+    <Project Path="RestfulBooker.Core/RBP.Core.csproj" />
+    <Project Path="RestfulBooker.Data/RBP.Data.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="E2E/RBP.Tests.E2E.csproj" Id="f41c0c18-a273-4aac-ae58-c182dd13a9b5" />
+    <Project Path="RestfulBooker.Tests/RBP.Tests.Api.csproj" />
+    <Project Path="UI/RBP.Tests.Ui.csproj" Id="bd653b6b-24aa-45fc-9494-c1dcac9aa1ca" />
+  </Folder>
 </Solution>

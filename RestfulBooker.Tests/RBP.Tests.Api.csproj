@@ -29,10 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestfulBooker.Api\RestfulBooker.Api.csproj" />
-    <ProjectReference Include="..\RestfulBooker.Core\RestfulBooker.Core.csproj" />
-    <ProjectReference Include="..\RestfulBooker.Data\RestfulBooker.Data.csproj" />
-    <ProjectReference Include="..\RestfulBooker.UI\RestfulBooker.UI.csproj" />
+    <ProjectReference Include="..\RestfulBooker.Api\RBP.Business.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
