@@ -13,13 +13,21 @@ Automation framework for API and UI testing using .NET 8.
 ## Architecture
 
 ```
-RestfulBooker.Automation
-│
-├── RestfulBooker.Api
-├── RestfulBooker.Core
-├── RestfulBooker.Data
-├── RestfulBooker.UI
-└── RestfulBooker.Tests
+RBP.TAF.sln 
+
+├── src/ 
+│   ├── RBP.Core/         
+│   ├── RBP.Business.Api/       
+│   ├── RBP.Business.Ui/        
+│   ├── RBP.Data/             
+├── tests/ 
+│   ├── RBP.Tests.Api/    
+│   ├── RBP.Tests.Ui/              
+│   └── RBP.Tests.E2E/          
+└── config/ 
+    ├── appsettings.json 
+    ├── appsettings.Local.json 
+    └── appsettings.CI.json
 ```
 
 ## Current Status
