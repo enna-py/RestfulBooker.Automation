@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="RestfulBooker.Api/RestfulBooker.Api.csproj" />
+  <Project Path="RestfulBooker.Core/RestfulBooker.Core.csproj" />
+  <Project Path="RestfulBooker.Data/RestfulBooker.Data.csproj" />
+  <Project Path="RestfulBooker.Tests/RestfulBooker.Tests.csproj" />
+  <Project Path="RestfulBooker.UI/RestfulBooker.UI.csproj" />
+</Solution>
