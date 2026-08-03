@@ -1,15 +1,15 @@
 <Solution>
   <Folder Name="/config/">
-    <File Path="RestfulBooker.Tests/appsettings.json" />
-    <File Path="RestfulBooker.Tests/appsettings.local.json" />
-    <File Path="RestfulBooker.Tests/ReportPortal.config.json" />
+    <File Path="/appsettings.json" />
+    <File Path="/appsettings.local.json" />
+    <File Path="/ReportPortal.config.json" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Folder Name="/src/">
-    <Project Path="RBP.Business.Ui/RBP.Business.Ui.csproj" Id="f7a88bd7-1e2a-4419-8362-845d670ab90f" />
-    <Project Path="RestfulBooker.Api/RBP.Business.Api.csproj" />
+  <Folder Name="/">
+    <Project Path="src/RBP.Business.Ui/RBP.Business.Ui.csproj" Id="f7a88bd7-1e2a-4419-8362-845d670ab90f" />
+    <Project Path="RBP.Business.Api/RBP.Business.Api.csproj" />
     <Project Path="RestfulBooker.Core/RBP.Core.csproj" />
     <Project Path="RestfulBooker.Data/RBP.Data.csproj" />
   </Folder>

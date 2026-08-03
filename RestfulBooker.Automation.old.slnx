@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/config/">
+    <File Path="config/appsettings.json" />
+    <File Path="config/ReportPortal.config.json" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/RBP.Business.Api/RBP.Business.Api.csproj" />
+    <Project Path="src/RBP.Business.Ui/RBP.Business.Ui.csproj" Id="c00cec7f-01be-4104-8642-0894f2134be1" />
+    <Project Path="src/RBP.Core/RBP.Core.csproj" />
+    <Project Path="src/RBP.Data/RBP.Data.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RBP.Tests.Api/RBP.Tests.Api.csproj" />
+    <Project Path="tests/RBP.Tests.E2E/RBP.Tests.E2E.csproj" Id="f41c0c18-a273-4aac-ae58-c182dd13a9b5" />
+    <Project Path="tests/RBP.Tests.Ui/RBP.Tests.Ui.csproj" Id="665f0b64-bc1a-4aeb-9e33-c37d419bc5dc" />
+  </Folder>
+</Solution>
