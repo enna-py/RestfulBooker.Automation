@@ -24,7 +24,7 @@ public static class ConfigurationService
         return new ConfigurationBuilder()
             .SetBasePath(configurationPath)
             .AddJsonFile("appsettings.json", optional: false)
-            .AddJsonFile("appsettings.Local.json", optional: true)
+            //.AddJsonFile("ReportPortal.config.json", optional: true)
             .AddEnvironmentVariables()
             .Build();
     }
@@ -103,12 +103,6 @@ public static class ConfigurationService
 
     private static void ValidateReportPortal(ReportPortalSettings reportPortal)
     {
-        RequireValidUri(reportPortal.Endpoint,
-            $"{nameof(ReportPortalSettings)}.{nameof(ReportPortalSettings.Endpoint)}");
-
-        RequireNotEmpty(reportPortal.Project,
-            $"{nameof(ReportPortalSettings)}.{nameof(ReportPortalSettings.Project)}");
-
         RequireNotEmpty(reportPortal.Launch,
             $"{nameof(ReportPortalSettings)}.{nameof(ReportPortalSettings.Launch)}");
 

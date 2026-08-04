@@ -82,6 +82,8 @@ public abstract class BaseFixture
     [TearDown]
     public async Task Cleanup()
     {
+        await SaveScreenshotOnFailureAsync();
+
         await Context.CloseAsync();
 
         LoggerManager.Logger.Information(
@@ -96,5 +98,36 @@ public abstract class BaseFixture
         return (TPage)Activator.CreateInstance(
             typeof(TPage),
             Page)!;
+    }
+
+    private async Task SaveScreenshotOnFailureAsync()
+    {
+        if (TestContext.CurrentContext.Result.Outcome.Status != NUnit.Framework.Interfaces.TestStatus.Failed)
+        {
+            return;
+        }
+
+        string screenshotsDirectory = Path.Combine(
+            TestContext.CurrentContext.WorkDirectory,
+            "Screenshots");
+
+        Directory.CreateDirectory(screenshotsDirectory);
+
+        string fileName =
+            $"{TestContext.CurrentContext.Test.Name}_{DateTime.Now:yyyyMMdd_HHmmss}.png";
+
+        string filePath = Path.Combine(screenshotsDirectory, fileName);
+
+        await Page.ScreenshotAsync(new()
+        {
+            Path = filePath,
+            FullPage = true
+        });
+
+        TestContext.AddTestAttachment(filePath, "Failure screenshot");
+
+        LoggerManager.Logger.Error(
+            "Failure screenshot saved to {Path}",
+            filePath);
     }
 }

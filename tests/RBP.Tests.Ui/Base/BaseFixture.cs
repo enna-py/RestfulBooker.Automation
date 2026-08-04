@@ -1,7 +1,9 @@
 ﻿using Microsoft.Playwright;
+using NUnit.Framework.Interfaces;
 using RBP.Business.Ui.Browser;
 using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pages.Admin;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Core.Logging;
 
@@ -74,10 +76,31 @@ public abstract class BaseFixture
     [TearDown]
     public async Task Cleanup()
     {
-        await Context.CloseAsync();
+        try
+        {
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+            {
+                byte[] screenshot = await Page.ScreenshotAsync(new()
+                {
+                    FullPage = true
+                });
 
-        LoggerManager.Logger.Information(
-            $"Finished test: {TestContext.CurrentContext.Test.Name}");
+                ReportPortal.Shared.Context.Current.Log.Error(
+                    TestContext.CurrentContext.Test.Name,
+                    "image/png",
+                    screenshot);
+            }
+        }
+        finally
+        {
+            await Context.CloseAsync();
+
+            TokenProvider.SignOut();
+
+            LoggerManager.Logger.Information(
+                "Finished test: {TestName}",
+                TestContext.CurrentContext.Test.Name);
+        }
     }
 
     protected TPage CreatePage<TPage>()
@@ -91,5 +114,20 @@ public abstract class BaseFixture
     protected async Task<AdminRoomsPage> LoginAsAdminAsync()
     {
         return await (await CreatePage<AdminLoginPage>().OpenAsync()).LoginAsync();
+    }
+
+    public static async Task AttachScreenshotAsync(
+        IPage page,
+        string message = "Screenshot on failure")
+    {
+        byte[] bytes = await page.ScreenshotAsync(new()
+        {
+            FullPage = true
+        });
+
+        Context.Current.Log.Error(
+            message,
+            "image/png",
+            bytes);
     }
 }
