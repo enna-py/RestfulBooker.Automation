@@ -9,11 +9,23 @@ public static class BrowserFactory
     {
         IPlaywright playwright = await Playwright.CreateAsync();
 
-        IBrowser browser = await playwright.Chromium.LaunchAsync(
-            new BrowserTypeLaunchOptions
+        IBrowserType browserType =
+            settings.Browser.ToLowerInvariant() switch
             {
-                Headless = settings.Headless
-            });
+                "chromium" => playwright.Chromium,
+                "firefox" => playwright.Firefox,
+                "webkit" => playwright.Webkit,
+
+                _ => throw new ArgumentException(
+                    $"Unsupported browser: {settings.Browser}")
+            };
+
+        IBrowser browser =
+            await browserType.LaunchAsync(
+                new BrowserTypeLaunchOptions
+                {
+                    Headless = settings.Headless
+                });
 
         return new BrowserSession(
             playwright,

@@ -25,7 +25,7 @@ public static class ConfigurationService
             .SetBasePath(configurationPath)
             .AddJsonFile("appsettings.json", optional: false)
             //.AddJsonFile("ReportPortal.config.json", optional: true)
-            .AddEnvironmentVariables()
+            .AddEnvironmentVariables("RBP_")
             .Build();
     }
 

@@ -29,6 +29,9 @@ public class RoomBookingFixture : BaseFixture
     };
 
     [Test]
+    [Category("Smoke")]
+    [Category("E2E")]
+    [Property("JiraKey", "RBP-2")]
     public async Task User_Should_Be_Able_To_Book_Room()
     {
         await AuthApiClient.LoginAsync();

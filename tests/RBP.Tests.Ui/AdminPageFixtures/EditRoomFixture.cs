@@ -10,6 +10,9 @@ namespace RBP.Tests.Ui.AdminPageFixtures;
 public class EditRoomFixture : BaseFixture
 {
     [Test]
+    [Category("Regression")]
+    [Category("UI")]
+    [Property("JiraKey", "RBP-3")]
     public async Task EditRoomViaAdminPanelShouldUpdatePublicRoomData()
     {
         RoomCardDto expectedRoom =
