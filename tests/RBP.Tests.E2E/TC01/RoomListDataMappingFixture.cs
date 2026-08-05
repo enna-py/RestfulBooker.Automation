@@ -7,7 +7,7 @@ using RestfulBooker.Data.DTO;
 
 namespace RBP.Tests.E2E.TC01;
 
-public class RoomListDataMapping : BaseFixture
+public class RoomListDataMappingFixture : BaseFixture
 {
     [Test]
     [Category("Smoke")]

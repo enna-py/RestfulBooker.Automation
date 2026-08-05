@@ -1,6 +1,7 @@
 ﻿using RBP.Business.Ui.Components;
 using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pages.Admin;
+using RBP.Business.Ui.Steps;
 using RBP.Data.DTO.Room;
 using RBP.Tests.Ui.Assertions;
 using RBP.Tests.Ui.Base;
@@ -13,7 +14,7 @@ public class EditRoomFixture : BaseFixture
     [Category("Regression")]
     [Category("UI")]
     [Property("JiraKey", "RBP-3")]
-    public async Task EditRoomViaAdminPanelShouldUpdatePublicRoomData()
+    public async Task Edit_Room_Via_Admin_Panel_Should_Update_Public_Room_Data()
     {
         RoomCardDto expectedRoom =
             new EditRoomDataBuilder()
@@ -24,12 +25,11 @@ public class EditRoomFixture : BaseFixture
 
         AdminRoomsPage adminRooms = await LoginAsAdminAsync();
 
-        EditRoomComponent editor = await adminRooms.OpenEditRoomAsync(1);
+        RoomManagementSteps roomSteps = new(adminRooms);
 
-        await editor.SetDescriptionAsync(expectedRoom.Description);
-        await editor.SetPriceAsync(expectedRoom.Price);
-        await editor.SelectFeaturesAsync(expectedRoom.Features.ToArray());
-        await editor.SaveAsync();
+        await roomSteps.EditRoomAsync(
+            roomId: 1,
+            room: expectedRoom);
 
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
 

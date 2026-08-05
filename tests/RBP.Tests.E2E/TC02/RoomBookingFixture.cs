@@ -1,7 +1,8 @@
 ﻿using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pagesl;
-using RBP.Core.Assertion;
+using RBP.Business.Ui.Steps;
 using RBP.Data.DTO.Booking;
+using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
 using RestfulBooker.Api.Clients;
 using RestfulBooker.Core.Authentication;
@@ -36,27 +37,15 @@ public class RoomBookingFixture : BaseFixture
     {
         await AuthApiClient.LoginAsync();
 
-        LoggerManager.Logger.Information(
-            "Authenticated = {Auth}, token = {Token}",
-            TokenProvider.IsAuthenticated,
-            TokenProvider.Token);
-
         HomePage homePage =
             await CreatePage<HomePage>()
                 .OpenAsync();
 
-        await homePage.FillBookingDatesAsync(requestModel.CheckIn, requestModel.CheckOut);
+        BookingSteps bookingSteps =
+            new(homePage);
 
         RoomDetailsPage roomDetailsPage =
-            await homePage.OpenRoomAsync(3);
-
-        await roomDetailsPage.ReserveNowAsync();
-
-        await roomDetailsPage.BookingForm.WaitUntilVisibleAsync();
-
-        await roomDetailsPage.BookingForm.FillAsync(requestModel);
-
-        await roomDetailsPage.BookingForm.SubmitAsync();
+            await bookingSteps.BookRoomAsync(requestModel);
 
         await roomDetailsPage.ShouldHaveSuccessfulBooking();
 

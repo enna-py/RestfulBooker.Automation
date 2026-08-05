@@ -4,23 +4,33 @@ using RBP.Data.DTO.Booking;
 
 namespace RBP.Business.Ui.Steps;
 
-public static class BookingSteps
+public sealed class BookingSteps
 {
-    public static async Task<BookingResult> BookRoom(
-     this HomePage homePage,
-     BookingRequest request)
+    private readonly HomePage _homePage;
+
+    public BookingSteps(HomePage homePage)
     {
-        RoomDetailsPage room =
-            await homePage.OpenRoomAsync(request.RoomId);
+        _homePage = homePage;
+    }
 
-        await room.ReserveNowAsync();
+    public async Task<RoomDetailsPage> BookRoomAsync(
+        BookingRequest request)
+    {
+        await _homePage.FillBookingDatesAsync(
+            request.CheckIn,
+            request.CheckOut);
 
-        await room.BookingForm.FillAsync(request);
+        RoomDetailsPage roomDetailsPage =
+            await _homePage.OpenRoomAsync(request.RoomId);
 
-        await room.BookingForm.SubmitAsync();
+        await roomDetailsPage.ReserveNowAsync();
 
-        return new BookingResult(
-            await room.GetConfirmationTextAsync(),
-            await room.IsSuccessAsync());
+        await roomDetailsPage.BookingForm.WaitUntilVisibleAsync();
+
+        await roomDetailsPage.BookingForm.FillAsync(request);
+
+        await roomDetailsPage.BookingForm.SubmitAsync();
+
+        return roomDetailsPage;
     }
 }

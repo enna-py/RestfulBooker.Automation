@@ -3,7 +3,7 @@ using RBP.Business.Ui.Pagesl;
 using RBP.Data.DTO.Booking;
 using RestfulBooker.Core.Logging;
 
-namespace RBP.Core.Assertion;
+namespace RBP.Tests.E2E.Assertions;
 
 public static class RoomDetailsPageAssertions
 {

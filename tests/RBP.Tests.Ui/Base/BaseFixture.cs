@@ -117,15 +117,15 @@ public abstract class BaseFixture
     }
 
     public static async Task AttachScreenshotAsync(
-        IPage page,
-        string message = "Screenshot on failure")
+    IPage page,
+    string message = "Screenshot on failure")
     {
         byte[] bytes = await page.ScreenshotAsync(new()
         {
             FullPage = true
         });
 
-        Context.Current.Log.Error(
+        ReportPortal.Shared.Context.Current.Log.Error(
             message,
             "image/png",
             bytes);
