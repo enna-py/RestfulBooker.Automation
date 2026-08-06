@@ -13,7 +13,7 @@ public class EditRoomFixture : BaseFixture
     [Test]
     [Category("Regression")]
     [Category("UI")]
-    [Property("JiraKey", "RBP-3")]
+    [Property("JiraKey", "RBP-13")]
     public async Task Edit_Room_Via_Admin_Panel_Should_Update_Public_Room_Data()
     {
         RoomCardDto expectedRoom =

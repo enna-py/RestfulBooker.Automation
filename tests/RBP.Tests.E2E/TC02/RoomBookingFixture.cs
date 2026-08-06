@@ -14,11 +14,11 @@ public class RoomBookingFixture : BaseFixture
 {
     BookingRequest requestModel = new()
     {
-        RoomId = 3,
+        RoomId = 2,
 
-        CheckIn = DateOnly.FromDateTime(DateTime.Today.AddDays(85)),
+        CheckIn = DateOnly.FromDateTime(DateTime.Today.AddDays(91)),
 
-        CheckOut = DateOnly.FromDateTime(DateTime.Today.AddDays(86)),
+        CheckOut = DateOnly.FromDateTime(DateTime.Today.AddDays(92)),
 
         Guest = new GuestDto
         {
@@ -32,10 +32,14 @@ public class RoomBookingFixture : BaseFixture
     [Test]
     [Category("Smoke")]
     [Category("E2E")]
-    [Property("JiraKey", "RBP-2")]
-    public async Task User_Should_Be_Able_To_Book_Room()
+    [Property("JiraKey", "RBP-8")]
+    public async Task TC02_User_Should_Be_Able_To_Book_Room()
     {
         await AuthApiClient.LoginAsync();
+        LoggerManager.Logger.Information(
+    "After login: Authenticated={Auth}, Token={Token}",
+    TokenProvider.IsAuthenticated,
+    TokenProvider.Token);
 
         HomePage homePage =
             await CreatePage<HomePage>()

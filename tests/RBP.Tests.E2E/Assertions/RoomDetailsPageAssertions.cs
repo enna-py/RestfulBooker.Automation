@@ -2,21 +2,19 @@
 using RBP.Business.Ui.Pagesl;
 using RBP.Data.DTO.Booking;
 using RestfulBooker.Core.Logging;
+using static Microsoft.Playwright.Assertions;
 
 namespace RBP.Tests.E2E.Assertions;
 
 public static class RoomDetailsPageAssertions
 {
     public static async Task ShouldHaveSuccessfulBooking(
-        this RoomDetailsPage page)
+    this RoomDetailsPage page)
     {
-        LoggerManager.Logger.Information(
-            "Verifying successful message");
+        LoggerManager.Logger.Information("Verify booking confirmation");
 
-        string confirmation =
-            await page.GetConfirmationTextAsync();
-
-        confirmation.Should().Contain("Booking Confirmed");
+        await Expect(page.ConfirmationTitle).ToHaveTextAsync("Booking Confirmed");
+        await Expect(page.ConfirmationMessage).ToHaveTextAsync("Your booking has been confirmed for the following dates:");
     }
 
     public static void ShouldContainBooking(

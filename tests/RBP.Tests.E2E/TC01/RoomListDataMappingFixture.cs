@@ -12,7 +12,7 @@ public class RoomListDataMappingFixture : BaseFixture
     [Test]
     [Category("Smoke")]
     [Category("E2E")]
-    [Property("JiraKey", "RBP-1")]
+    [Property("JiraKey", "RBP-7")]
     public async Task Room_List_Should_Match_Api_Data()
     {
         IReadOnlyCollection<RoomDto> apiRooms = await RoomApiClient.GetRoomsAsync();

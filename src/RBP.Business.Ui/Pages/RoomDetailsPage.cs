@@ -2,16 +2,23 @@
 using RBP.Business.Ui.Components;
 using RBP.Business.Ui.Pages;
 using RestfulBooker.Core.Logging;
+using static Microsoft.Playwright.Assertions;
 
 namespace RBP.Business.Ui.Pagesl;
 
 public sealed class RoomDetailsPage : BasePage
 {
     private ILocator SubmitButton => Page.Locator("#doReservation");
-    private ILocator ConfirmationTitle =>
-    Page.GetByRole(
-        AriaRole.Heading,
-        new() { Name = "Booking Confirmed" });
+    
+    private ILocator BookingCard => Page.Locator("//div[contains(@class,'booking-card')]");
+    
+    public ILocator ConfirmationTitle => BookingCard.Locator("//h2");
+    
+    public ILocator ConfirmationMessage => BookingCard.Locator("//p[1]");
+    
+    public ILocator BookingDates => BookingCard.Locator(".//p/strong");
+
+    public ILocator ReturnHomeButton => BookingCard.Locator(".//a");
 
     public BookingFormComponent BookingForm { get; }
 
@@ -27,16 +34,9 @@ public sealed class RoomDetailsPage : BasePage
             "Clicking 'Reserve now'");
 
         await SubmitButton.ScrollIntoViewIfNeededAsync();
+
+        await Expect(SubmitButton).ToBeVisibleAsync();
+        
         await SubmitButton.ClickAsync();
-    }
-
-    public async Task<string> GetConfirmationTextAsync()
-    {
-        return await ConfirmationTitle.InnerTextAsync();
-    }
-
-    public async Task<bool> IsSuccessAsync()
-    {
-        throw new NotImplementedException();
     }
 }

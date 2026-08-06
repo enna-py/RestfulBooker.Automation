@@ -4,23 +4,23 @@ namespace RestfulBooker.Core.Authentication;
 
 public static class TokenProvider
 {
-    private static readonly AsyncLocal<string?> _token = new();
+    private static string? _token;
 
     public static string Token =>
-        _token.Value ?? string.Empty;
+        _token ?? string.Empty;
 
     public static bool IsAuthenticated =>
-        !string.IsNullOrWhiteSpace(_token.Value);
+        !string.IsNullOrWhiteSpace(_token);
 
     public static void Authenticate(string token)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(token);
 
-        _token.Value = token;
+        _token = token;
     }
 
     public static void SignOut()
     {
-        _token.Value = null;
+        _token = null;
     }
 }

@@ -95,8 +95,8 @@ public abstract class BaseApiClient
                 request,
                 cancellationToken);
         LoggerManager.Logger.Information(
-    "Response content = {Content}",
-    response.Content);
+            "Response content = {Content}",
+            response.Content);
 
         LoggerManager.Logger.Information(
             "Error message = {Error}",
@@ -107,13 +107,14 @@ public abstract class BaseApiClient
             string.Join(", ",
                 response.Headers.Select(h => $"{h.Name}={h.Value}")));
         LoggerManager.Logger.Information(
-    "Resource = {Resource}",
-    request.Resource);
+            "Resource = {Resource}",
+            request.Resource);
 
         LoggerManager.Logger.Information(
             "Parameters = {Parameters}",
             string.Join(", ",
                 request.Parameters.Select(p => $"{p.Name}={p.Value} ({p.Type})")));
+
         stopwatch.Stop();
 
         LogResponse(response, stopwatch.Elapsed);
@@ -184,10 +185,17 @@ public abstract class BaseApiClient
 
     private static void AttachAuthentication(RestRequest request)
     {
+        LoggerManager.Logger.Information(
+            "AttachAuthentication. Authenticated={Authenticated}, Token={Token}",
+            TokenProvider.IsAuthenticated,
+            TokenProvider.Token);
+
         if (!TokenProvider.IsAuthenticated)
             return;
 
         request.AddCookie("token", TokenProvider.Token);
+
+        LoggerManager.Logger.Information("Cookie added.");
     }
 
     private void LogRequest(RestRequest request)

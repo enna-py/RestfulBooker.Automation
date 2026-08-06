@@ -2,10 +2,13 @@
 using RestfulBooker.Api.Endpoints;
 using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
+using RestfulBooker.Core.Logging;
 using RestfulBooker.Data.DTO.Auth;
 using RestfulBooker.Data.DTO.Common;
 using RestfulBooker.Data.Responses.Auth;
 using RestSharp;
+using System.Net;
+using System.Security.Authentication;
 
 namespace RestfulBooker.Api.Clients;
 
@@ -15,7 +18,6 @@ public sealed class AuthApiClient : BaseApiClient
         : base(ConfigurationService.Current.Api.AuthUrl)
     {
     }
-
     public async Task LoginAsync(LoginRequest request)
     {
         RestResponse response =
@@ -23,19 +25,25 @@ public sealed class AuthApiClient : BaseApiClient
                 AuthEndpoints.Login,
                 request);
 
-        var cookieHeader = response.Headers
-            .FirstOrDefault(h => h.Name?.ToString() == "Set-Cookie");
+        var cookieHeader = response.Headers.FirstOrDefault(
+            h => string.Equals(
+                h.Name?.ToString(),
+                "Set-Cookie",
+                StringComparison.OrdinalIgnoreCase));
 
-        if (cookieHeader != null)
+        if (cookieHeader is null)
         {
-            string cookie = cookieHeader.Value!.ToString()!;
-
-            string token = cookie
-                .Split(';')[0]
-                .Replace("token=", "");
-
-            TokenProvider.Authenticate(token);
+            throw new AuthenticationException(
+                "Authentication cookie was not returned.");
         }
+
+        string cookie = cookieHeader.Value!.ToString()!;
+
+        string token = cookie
+            .Substring(cookie.IndexOf('=') + 1)
+            .Split(';')[0];
+
+        TokenProvider.Authenticate(token);
     }
 
     public Task LoginAsync()
