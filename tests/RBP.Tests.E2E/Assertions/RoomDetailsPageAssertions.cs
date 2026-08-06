@@ -27,4 +27,9 @@ public static class RoomDetailsPageAssertions
             b.BookingDates.CheckIn == request.CheckIn &&
             b.BookingDates.CheckOut == request.CheckOut);
     }
+
+    public static void ShouldMatch(this BookingDto actual, BookingDto expected)
+    {
+        actual.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<BookingDto>());
+    }
 }

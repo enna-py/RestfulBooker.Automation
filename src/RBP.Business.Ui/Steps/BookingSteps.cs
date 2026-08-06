@@ -13,7 +13,7 @@ public sealed class BookingSteps
         _homePage = homePage;
     }
 
-    public async Task<RoomDetailsPage> BookRoomAsync(
+    public async Task<(RoomDetailsPage Page, BookingDto Booking)> BookRoomAsync(
         BookingRequest request)
     {
         await _homePage.FillBookingDatesAsync(
@@ -29,8 +29,8 @@ public sealed class BookingSteps
 
         await roomDetailsPage.BookingForm.FillAsync(request);
 
-        await roomDetailsPage.BookingForm.SubmitAsync();
+        BookingDto booking = await roomDetailsPage.BookingForm.SubmitAsync();
 
-        return roomDetailsPage;
+        return (roomDetailsPage, booking);
     }
 }

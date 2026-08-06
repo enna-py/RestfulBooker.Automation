@@ -1,6 +1,7 @@
 ﻿using Microsoft.Playwright;
 using RBP.Data.DTO.Booking;
 using RestfulBooker.Core.Logging;
+using System.Text.Json;
 
 namespace RBP.Business.Ui.Components;
 
@@ -85,11 +86,20 @@ public sealed class BookingFormComponent
         await FillPhoneAsync(request.Guest.Phone);
     }
 
-    public async Task SubmitAsync()
+    public async Task<BookingDto> SubmitAsync()
     {
         LoggerManager.Logger.Information(
             "Submitting booking");
 
+        var responseTask = _page.WaitForResponseAsync(r =>
+            r.Url.EndsWith("/booking") &&
+            r.Request.Method == "POST");
+
         await SubmitButton.ClickAsync();
+
+        var response = await responseTask;
+
+        return JsonSerializer.Deserialize<BookingDto>(
+            await response.TextAsync())!;
     }
 }

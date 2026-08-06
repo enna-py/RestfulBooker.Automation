@@ -1,4 +1,5 @@
-﻿using RBP.Business.Ui.Pages;
+﻿using AwesomeAssertions;
+using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pagesl;
 using RBP.Business.Ui.Steps;
 using RBP.Data.DTO.Booking;
@@ -14,11 +15,11 @@ public class RoomBookingFixture : BaseFixture
 {
     BookingRequest requestModel = new()
     {
-        RoomId = 2,
+        RoomId = 3,
 
-        CheckIn = DateOnly.FromDateTime(DateTime.Today.AddDays(91)),
+        CheckIn = DateOnly.FromDateTime(DateTime.Today.AddDays(92)),
 
-        CheckOut = DateOnly.FromDateTime(DateTime.Today.AddDays(92)),
+        CheckOut = DateOnly.FromDateTime(DateTime.Today.AddDays(93)),
 
         Guest = new GuestDto
         {
@@ -37,9 +38,9 @@ public class RoomBookingFixture : BaseFixture
     {
         await AuthApiClient.LoginAsync();
         LoggerManager.Logger.Information(
-    "After login: Authenticated={Auth}, Token={Token}",
-    TokenProvider.IsAuthenticated,
-    TokenProvider.Token);
+            "After login: Authenticated={Auth}, Token={Token}",
+            TokenProvider.IsAuthenticated,
+            TokenProvider.Token);
 
         HomePage homePage =
             await CreatePage<HomePage>()
@@ -48,15 +49,13 @@ public class RoomBookingFixture : BaseFixture
         BookingSteps bookingSteps =
             new(homePage);
 
-        RoomDetailsPage roomDetailsPage =
-            await bookingSteps.BookRoomAsync(requestModel);
+        var result = await bookingSteps.BookRoomAsync(requestModel);
 
-        await roomDetailsPage.ShouldHaveSuccessfulBooking();
+        await result.Page.ShouldHaveSuccessfulBooking();
 
-        IReadOnlyCollection<BookingDto> bookings =
-            await BookingApiClient.GetBookingsByRoomAsync(requestModel.RoomId);
+        BookingDto actualBooking = await BookingApiClient.GetBookingAsync(result.Booking.BookingId);
 
-        bookings.ShouldContainBooking(requestModel);
+        actualBooking.ShouldMatch(result.Booking);
     }
 }
 

@@ -16,20 +16,20 @@ public sealed class BookingApiClient : BaseApiClient
     {
     }
 
-    public async Task<IReadOnlyCollection<BookingDto>> GetBookingsByRoomAsync(int roomId)
+    public async Task<BookingDto> GetBookingAsync(int bookingId)
     {
-        ApiResponse<BookingListDto> response =
-            await GetAsync<BookingListDto>("/", validateResponse: true);
+        ApiResponse<BookingDto> response =
+            await GetAsync<BookingDto>(
+                $"/{bookingId}",
+                validateResponse: true);
 
         if (response.Data is null)
         {
             throw new ApiException(
                 (int)response.StatusCode,
-                "Booking list was not returned.");
+                $"Booking '{bookingId}' was not returned.");
         }
 
-        return response.Data.Bookings
-            .Where(b => b.RoomId == roomId)
-            .ToList();
+        return response.Data;
     }
 }
