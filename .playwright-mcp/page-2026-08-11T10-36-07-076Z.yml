@@ -1,0 +1,19 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e3]:
+    - navigation [ref=f6e4]:
+      - generic [ref=f6e5]:
+        - link "Restful Booker Platform Demo" [ref=f6e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f6e7]:
+          - list
+          - list [ref=f6e8]:
+            - listitem [ref=f6e9]:
+              - link "Front Page" [ref=f6e10] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f6e11]:
+              - button "Logout" [ref=f6e12] [cursor=pointer]
+    - generic [ref=f6e13]:
+      - status [ref=f6e14]:
+        - generic [ref=f6e15]: Loading...
+      - paragraph [ref=f6e16]: Loading...
+  - button "Open Next.js Dev Tools" [ref=f6e22] [cursor=pointer]

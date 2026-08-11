@@ -1,0 +1,134 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e3]:
+    - navigation [ref=f3e4]:
+      - generic [ref=f3e5]:
+        - link "Restful Booker Platform Demo" [ref=f3e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f3e7]:
+          - list [ref=f3e27]:
+            - listitem [ref=f3e28]:
+              - link "Rooms" [ref=f3e29] [cursor=pointer]:
+                - /url: /admin/rooms
+            - listitem [ref=f3e30]:
+              - link "Report" [ref=f3e31] [cursor=pointer]:
+                - /url: /admin/report
+            - listitem [ref=f3e32]:
+              - link "Branding" [ref=f3e33] [cursor=pointer]:
+                - /url: /admin/branding
+            - listitem [ref=f3e34]:
+              - link "Messages 21" [ref=f3e35] [cursor=pointer]:
+                - /url: /admin/message
+                - text: Messages
+                - generic [ref=f3e36]: "21"
+          - list [ref=f3e8]:
+            - listitem [ref=f3e9]:
+              - link "Front Page" [ref=f3e10] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f3e11]:
+              - button "Logout" [ref=f3e12] [cursor=pointer]
+    - generic [ref=f3e39]:
+      - generic [ref=f3e40]:
+        - paragraph [ref=f3e42]: Name
+        - paragraph [ref=f3e44]: Subject
+      - generic [ref=f3e46]:
+        - paragraph [ref=f3e48]: James Dean
+        - paragraph [ref=f3e50]: Booking enquiry
+        - generic [ref=f3e51]: 
+      - generic [ref=f3e53]:
+        - paragraph [ref=f3e55]: Olenate Pomazan
+        - paragraph [ref=f3e57]: You have a new booking!
+        - generic [ref=f3e58]: 
+      - generic [ref=f3e60]:
+        - paragraph [ref=f3e62]: Olenate Pomazan
+        - paragraph [ref=f3e64]: You have a new booking!
+        - generic [ref=f3e65]: 
+      - generic [ref=f3e67]:
+        - paragraph [ref=f3e69]: Olenate Pomazan
+        - paragraph [ref=f3e71]: You have a new booking!
+        - generic [ref=f3e72]: 
+      - generic [ref=f3e74]:
+        - paragraph [ref=f3e76]: test test
+        - paragraph [ref=f3e78]: You have a new booking!
+        - generic [ref=f3e79]: 
+      - generic [ref=f3e81]:
+        - paragraph [ref=f3e83]: Olenate Pomazan
+        - paragraph [ref=f3e85]: You have a new booking!
+        - generic [ref=f3e86]: 
+      - generic [ref=f3e88]:
+        - paragraph [ref=f3e90]: Olenate Pomazan
+        - paragraph [ref=f3e92]: You have a new booking!
+        - generic [ref=f3e93]: 
+      - generic [ref=f3e95]:
+        - paragraph [ref=f3e97]: Olenate Pomazan
+        - paragraph [ref=f3e99]: You have a new booking!
+        - generic [ref=f3e100]: 
+      - generic [ref=f3e102]:
+        - paragraph [ref=f3e104]: Olenate Pomazan
+        - paragraph [ref=f3e106]: You have a new booking!
+        - generic [ref=f3e107]: 
+      - generic [ref=f3e109]:
+        - paragraph [ref=f3e111]: Olenate Pomazan
+        - paragraph [ref=f3e113]: You have a new booking!
+        - generic [ref=f3e114]: 
+      - generic [ref=f3e116]:
+        - paragraph [ref=f3e118]: Olenate Pomazan
+        - paragraph [ref=f3e120]: You have a new booking!
+        - generic [ref=f3e121]: 
+      - generic [ref=f3e123]:
+        - paragraph [ref=f3e125]: Olenate Pomazan
+        - paragraph [ref=f3e127]: You have a new booking!
+        - generic [ref=f3e128]: 
+      - generic [ref=f3e130]:
+        - paragraph [ref=f3e132]: Olenate Pomazan
+        - paragraph [ref=f3e134]: You have a new booking!
+        - generic [ref=f3e135]: 
+      - generic [ref=f3e137]:
+        - paragraph [ref=f3e139]: Olenate Pomazan
+        - paragraph [ref=f3e141]: You have a new booking!
+        - generic [ref=f3e142]: 
+      - generic [ref=f3e144]:
+        - paragraph [ref=f3e146]: Olenate Pomazan
+        - paragraph [ref=f3e148]: You have a new booking!
+        - generic [ref=f3e149]: 
+      - generic [ref=f3e151]:
+        - paragraph [ref=f3e153]: Olenate Pomazan
+        - paragraph [ref=f3e155]: You have a new booking!
+        - generic [ref=f3e156]: 
+      - generic [ref=f3e158]:
+        - paragraph [ref=f3e160]: Olenate Pomazan
+        - paragraph [ref=f3e162]: You have a new booking!
+        - generic [ref=f3e163]: 
+      - generic [ref=f3e165]:
+        - paragraph [ref=f3e167]: Olenate Pomazan
+        - paragraph [ref=f3e169]: You have a new booking!
+        - generic [ref=f3e170]: 
+      - generic [ref=f3e172]:
+        - paragraph [ref=f3e174]: Olenate Pomazan
+        - paragraph [ref=f3e176]: You have a new booking!
+        - generic [ref=f3e177]: 
+      - generic [ref=f3e179]:
+        - paragraph [ref=f3e181]: Olenate Pomazan
+        - paragraph [ref=f3e183]: You have a new booking!
+        - generic [ref=f3e184]: 
+      - generic [ref=f3e186]:
+        - paragraph [ref=f3e188]: Olenate Pomazan
+        - paragraph [ref=f3e190]: You have a new booking!
+        - generic [ref=f3e191]: 
+      - generic [ref=f3e193]:
+        - paragraph [ref=f3e195]: Olenate Pomazan
+        - paragraph [ref=f3e197]: You have a new booking!
+        - generic [ref=f3e198]: 
+      - generic [ref=f3e200]:
+        - paragraph [ref=f3e202]: test test
+        - paragraph [ref=f3e204]: You have a new booking!
+        - generic [ref=f3e205]: 
+      - generic [ref=f3e207]:
+        - paragraph [ref=f3e209]: Olenate Pomazan
+        - paragraph [ref=f3e211]: You have a new booking!
+        - generic [ref=f3e212]: 
+      - generic [ref=f3e214]:
+        - paragraph [ref=f3e216]: Olenate Pomazan
+        - paragraph [ref=f3e218]: You have a new booking!
+        - generic [ref=f3e219]: 
+  - button "Open Next.js Dev Tools" [ref=f3e22] [cursor=pointer]
+  - alert [ref=f3e26]

@@ -1,0 +1,150 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - navigation [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - link "Restful Booker Platform Demo" [ref=f2e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e7]:
+          - list [ref=f2e8]:
+            - listitem [ref=f2e9]:
+              - link "Rooms" [ref=f2e10] [cursor=pointer]:
+                - /url: /admin/rooms
+            - listitem [ref=f2e11]:
+              - link "Report" [ref=f2e12] [cursor=pointer]:
+                - /url: /admin/report
+            - listitem [ref=f2e13]:
+              - link "Branding" [ref=f2e14] [cursor=pointer]:
+                - /url: /admin/branding
+            - listitem [ref=f2e15]:
+              - link "Messages 21" [ref=f2e16] [cursor=pointer]:
+                - /url: /admin/message
+                - text: Messages
+                - generic [ref=f2e17]: "21"
+          - list [ref=f2e18]:
+            - listitem [ref=f2e19]:
+              - link "Front Page" [ref=f2e20] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f2e21]:
+              - button "Logout" [ref=f2e22] [cursor=pointer]
+    - generic [ref=f2e144]:
+      - generic [ref=f2e145]:
+        - generic [ref=f2e146]:
+          - button "Today" [ref=f2e147] [cursor=pointer]
+          - button "Back" [ref=f2e148] [cursor=pointer]
+          - button "Next" [ref=f2e149] [cursor=pointer]
+        - generic [ref=f2e150]: August 2026
+      - table "Month View" [ref=f2e151]:
+        - row [ref=f2e152]:
+          - columnheader "Sun" [ref=f2e154]
+          - columnheader "Mon" [ref=f2e156]
+          - columnheader "Tue" [ref=f2e158]
+          - columnheader "Wed" [ref=f2e160]
+          - columnheader "Thu" [ref=f2e162]
+          - columnheader "Fri" [ref=f2e164]
+          - columnheader "Sat" [ref=f2e166]
+        - rowgroup [ref=f2e167]:
+          - row [ref=f2e176]:
+            - generic [ref=f2e177]:
+              - cell [ref=f2e178]:
+                - button "26" [ref=f2e179] [cursor=pointer]
+              - cell [ref=f2e180]:
+                - button "27" [ref=f2e181] [cursor=pointer]
+              - cell [ref=f2e182]:
+                - button "28" [ref=f2e183] [cursor=pointer]
+              - cell [ref=f2e184]:
+                - button "29" [ref=f2e185] [cursor=pointer]
+              - cell [ref=f2e186]:
+                - button "30" [ref=f2e187] [cursor=pointer]
+              - cell [ref=f2e188]:
+                - button "31" [ref=f2e189] [cursor=pointer]
+              - cell [ref=f2e190]:
+                - button "01" [ref=f2e191] [cursor=pointer]
+        - rowgroup [ref=f2e192]:
+          - 'row "02 03 04 05 06 07 08 test test - Room: 101 test test - Room: 102" [ref=f2e201]':
+            - generic [ref=f2e202]:
+              - cell [ref=f2e203]:
+                - button "02" [ref=f2e204] [cursor=pointer]
+              - cell [ref=f2e205]:
+                - button "03" [ref=f2e206] [cursor=pointer]
+              - cell [ref=f2e207]:
+                - button "04" [ref=f2e208] [cursor=pointer]
+              - cell [ref=f2e209]:
+                - button "05" [ref=f2e210] [cursor=pointer]
+              - cell [ref=f2e211]:
+                - button "06" [ref=f2e212] [cursor=pointer]
+              - cell [ref=f2e213]:
+                - button "07" [ref=f2e214] [cursor=pointer]
+              - cell [ref=f2e215]:
+                - button "08" [ref=f2e216] [cursor=pointer]
+            - 'generic "test test - Room: 101" [ref=f2e221] [cursor=pointer]'
+            - 'generic "test test - Room: 102" [ref=f2e226] [cursor=pointer]'
+        - rowgroup [ref=f2e227]:
+          - row [ref=f2e236]:
+            - generic [ref=f2e237]:
+              - cell [ref=f2e238]:
+                - button "09" [ref=f2e239] [cursor=pointer]
+              - cell [ref=f2e240]:
+                - button "10" [ref=f2e241] [cursor=pointer]
+              - cell [ref=f2e242]:
+                - button "11" [ref=f2e243] [cursor=pointer]
+              - cell [ref=f2e244]:
+                - button "12" [ref=f2e245] [cursor=pointer]
+              - cell [ref=f2e246]:
+                - button "13" [ref=f2e247] [cursor=pointer]
+              - cell [ref=f2e248]:
+                - button "14" [ref=f2e249] [cursor=pointer]
+              - cell [ref=f2e250]:
+                - button "15" [ref=f2e251] [cursor=pointer]
+        - rowgroup [ref=f2e252]:
+          - row [ref=f2e261]:
+            - generic [ref=f2e262]:
+              - cell [ref=f2e263]:
+                - button "16" [ref=f2e264] [cursor=pointer]
+              - cell [ref=f2e265]:
+                - button "17" [ref=f2e266] [cursor=pointer]
+              - cell [ref=f2e267]:
+                - button "18" [ref=f2e268] [cursor=pointer]
+              - cell [ref=f2e269]:
+                - button "19" [ref=f2e270] [cursor=pointer]
+              - cell [ref=f2e271]:
+                - button "20" [ref=f2e272] [cursor=pointer]
+              - cell [ref=f2e273]:
+                - button "21" [ref=f2e274] [cursor=pointer]
+              - cell [ref=f2e275]:
+                - button "22" [ref=f2e276] [cursor=pointer]
+        - rowgroup [ref=f2e277]:
+          - row [ref=f2e286]:
+            - generic [ref=f2e287]:
+              - cell [ref=f2e288]:
+                - button "23" [ref=f2e289] [cursor=pointer]
+              - cell [ref=f2e290]:
+                - button "24" [ref=f2e291] [cursor=pointer]
+              - cell [ref=f2e292]:
+                - button "25" [ref=f2e293] [cursor=pointer]
+              - cell [ref=f2e294]:
+                - button "26" [ref=f2e295] [cursor=pointer]
+              - cell [ref=f2e296]:
+                - button "27" [ref=f2e297] [cursor=pointer]
+              - cell [ref=f2e298]:
+                - button "28" [ref=f2e299] [cursor=pointer]
+              - cell [ref=f2e300]:
+                - button "29" [ref=f2e301] [cursor=pointer]
+        - rowgroup [ref=f2e302]:
+          - row [ref=f2e311]:
+            - generic [ref=f2e312]:
+              - cell [ref=f2e313]:
+                - button "30" [ref=f2e314] [cursor=pointer]
+              - cell [ref=f2e315]:
+                - button "31" [ref=f2e316] [cursor=pointer]
+              - cell [ref=f2e317]:
+                - button "01" [ref=f2e318] [cursor=pointer]
+              - cell [ref=f2e319]:
+                - button "02" [ref=f2e320] [cursor=pointer]
+              - cell [ref=f2e321]:
+                - button "03" [ref=f2e322] [cursor=pointer]
+              - cell [ref=f2e323]:
+                - button "04" [ref=f2e324] [cursor=pointer]
+              - cell [ref=f2e325]:
+                - button "05" [ref=f2e326] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f2e138] [cursor=pointer]
+  - alert [ref=f2e142]

@@ -1,0 +1,34 @@
+- generic [active] [ref=f8e1]:
+  - generic [ref=f8e3]:
+    - navigation [ref=f8e4]:
+      - generic [ref=f8e5]:
+        - link "Restful Booker Platform Demo" [ref=f8e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f8e7]:
+          - list [ref=f8e8]:
+            - listitem [ref=f8e9]:
+              - link "Rooms" [ref=f8e10] [cursor=pointer]:
+                - /url: /admin/rooms
+            - listitem [ref=f8e11]:
+              - link "Report" [ref=f8e12] [cursor=pointer]:
+                - /url: /admin/report
+            - listitem [ref=f8e13]:
+              - link "Branding" [ref=f8e14] [cursor=pointer]:
+                - /url: /admin/branding
+            - listitem [ref=f8e15]:
+              - link "Messages 21" [ref=f8e16] [cursor=pointer]:
+                - /url: /admin/message
+                - text: Messages
+                - generic [ref=f8e17]: "21"
+          - list [ref=f8e18]:
+            - listitem [ref=f8e19]:
+              - link "Front Page" [ref=f8e20] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f8e21]:
+              - button "Logout" [ref=f8e22] [cursor=pointer]
+    - generic [ref=f8e24]:
+      - status [ref=f8e25]:
+        - generic [ref=f8e26]: Loading...
+      - paragraph [ref=f8e27]: Loading...
+  - button "Open Next.js Dev Tools" [ref=f8e33] [cursor=pointer]
+  - alert [ref=f8e37]

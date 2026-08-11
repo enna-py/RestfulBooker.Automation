@@ -1,0 +1,100 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - navigation [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - link "Restful Booker Platform Demo" [ref=f2e6] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e7]:
+          - list [ref=f2e8]:
+            - listitem [ref=f2e9]:
+              - link "Rooms" [ref=f2e10] [cursor=pointer]:
+                - /url: /admin/rooms
+            - listitem [ref=f2e11]:
+              - link "Report" [ref=f2e12] [cursor=pointer]:
+                - /url: /admin/report
+            - listitem [ref=f2e13]:
+              - link "Branding" [ref=f2e14] [cursor=pointer]:
+                - /url: /admin/branding
+            - listitem [ref=f2e15]:
+              - link "Messages 21" [ref=f2e16] [cursor=pointer]:
+                - /url: /admin/message
+                - text: Messages
+                - generic [ref=f2e17]: "21"
+          - list [ref=f2e18]:
+            - listitem [ref=f2e19]:
+              - link "Front Page" [ref=f2e20] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f2e21]:
+              - button "Logout" [ref=f2e22] [cursor=pointer]
+    - generic [ref=f2e24]:
+      - generic [ref=f2e25]:
+        - paragraph [ref=f2e27]: "Room #"
+        - paragraph [ref=f2e29]: Type
+        - paragraph [ref=f2e31]: Accessible
+        - paragraph [ref=f2e33]: Price
+        - paragraph [ref=f2e35]: Room details
+      - generic [ref=f2e38]:
+        - paragraph [ref=f2e40]: "101"
+        - paragraph [ref=f2e42]: Single
+        - paragraph [ref=f2e44]: "true"
+        - paragraph [ref=f2e46]: "150"
+        - paragraph [ref=f2e48]: WiFi, TV, Views
+        - generic [ref=f2e49]: 
+      - generic [ref=f2e52]:
+        - paragraph [ref=f2e54]: "102"
+        - paragraph [ref=f2e56]: Double
+        - paragraph [ref=f2e58]: "true"
+        - paragraph [ref=f2e60]: "150"
+        - paragraph [ref=f2e62]: TV, Radio, Safe
+        - generic [ref=f2e63]: 
+      - generic [ref=f2e66]:
+        - paragraph [ref=f2e68]: "103"
+        - paragraph [ref=f2e70]: Suite
+        - paragraph [ref=f2e72]: "true"
+        - paragraph [ref=f2e74]: "225"
+        - paragraph [ref=f2e76]: Radio, WiFi, Safe
+        - generic [ref=f2e77]: 
+      - generic [ref=f2e80]:
+        - paragraph [ref=f2e82]: "105"
+        - paragraph [ref=f2e84]: Single
+        - paragraph [ref=f2e86]: "true"
+        - paragraph [ref=f2e88]: "100"
+        - paragraph [ref=f2e90]:
+          - generic [ref=f2e91]: No features added to the room
+        - generic [ref=f2e92]: 
+      - generic [ref=f2e95]:
+        - textbox [ref=f2e97]
+        - combobox [ref=f2e99]:
+          - option "Single" [selected]
+          - option "Twin"
+          - option "Double"
+          - option "Family"
+          - option "Suite"
+        - combobox [ref=f2e101]:
+          - option "false" [selected]
+          - option "true"
+        - textbox [ref=f2e103]
+        - generic [ref=f2e104]:
+          - generic [ref=f2e105]:
+            - generic [ref=f2e107]:
+              - checkbox "WiFi" [ref=f2e108]
+              - generic [ref=f2e109]: WiFi
+            - generic [ref=f2e111]:
+              - checkbox "TV" [ref=f2e112]
+              - generic [ref=f2e113]: TV
+            - generic [ref=f2e115]:
+              - checkbox "Radio" [ref=f2e116]
+              - generic [ref=f2e117]: Radio
+          - generic [ref=f2e118]:
+            - generic [ref=f2e120]:
+              - checkbox "Refreshments" [ref=f2e121]
+              - generic [ref=f2e122]: Refreshments
+            - generic [ref=f2e124]:
+              - checkbox "Safe" [ref=f2e125]
+              - generic [ref=f2e126]: Safe
+            - generic [ref=f2e128]:
+              - checkbox "Views" [ref=f2e129]
+              - generic [ref=f2e130]: Views
+        - button "Create" [ref=f2e132] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f2e138] [cursor=pointer]
+  - alert [ref=f2e142]

@@ -9,7 +9,8 @@ namespace RBP.Business.Ui.Pages;
 
 public sealed class HomePage : BasePage
 {
-    private ILocator BookNowButton(int roomId) => Page.Locator($"a[href^='/reservation/{roomId}']");
+    private ILocator BookNowButton(int roomId) => Page.Locator("#rooms a.btn-primary").Nth(roomId - 1);
+
     public ILocator RoomCards =>
     Page.Locator(".room-card");
     private ILocator CheckInInput =>

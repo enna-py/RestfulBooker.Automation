@@ -2,7 +2,6 @@
 using RBP.Business.Ui.Components;
 using RBP.Business.Ui.Pages;
 using RestfulBooker.Core.Logging;
-using static Microsoft.Playwright.Assertions;
 
 namespace RBP.Business.Ui.Pagesl;
 
@@ -35,8 +34,8 @@ public sealed class RoomDetailsPage : BasePage
 
         await SubmitButton.ScrollIntoViewIfNeededAsync();
 
-        await Expect(SubmitButton).ToBeVisibleAsync();
-        
+        await SubmitButton.WaitForAsync();
+
         await SubmitButton.ClickAsync();
     }
 }

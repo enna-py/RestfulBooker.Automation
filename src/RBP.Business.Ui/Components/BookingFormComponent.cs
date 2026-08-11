@@ -8,19 +8,23 @@ namespace RBP.Business.Ui.Components;
 public sealed class BookingFormComponent
 {
     private readonly IPage _page;
+
+    private ILocator Root =>
+        _page.Locator(".booking-card form");
+
     private ILocator FirstName =>
-    _page.Locator(".room-firstname");
+    Root.Locator(".room-firstname");
 
     private ILocator LastName =>
-        _page.Locator(".room-lastname");
+        Root.Locator(".room-lastname");
 
     private ILocator Email =>
-        _page.Locator(".room-email");
+        Root.Locator(".room-email");
 
     private ILocator Phone =>
-        _page.Locator(".room-phone");
+        Root.Locator(".room-phone");
     private ILocator SubmitButton =>
-    _page.GetByRole(
+    Root.GetByRole(
         AriaRole.Button,
         new()
         {

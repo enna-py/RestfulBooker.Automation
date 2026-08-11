@@ -13,20 +13,23 @@ public sealed class EditRoomComponent
         _page = page;
     }
 
+    private ILocator Root =>
+        _page.Locator(".room-details");
+
     private ILocator Description =>
-        _page.Locator("#description");
+        Root.Locator("#description");
 
     private ILocator Price =>
-        _page.Locator("#roomPrice");
+        Root.Locator("#roomPrice");
 
     private ILocator Image =>
-        _page.Locator("#image");
+        Root.Locator("#image");
 
     private ILocator Update =>
-        _page.Locator("#update");
+        Root.Locator("#update");
 
     private ILocator Feature(string value) =>
-    _page.Locator($"input[value='{value}']");
+    Root.Locator($"input[value='{value}']");
 
     public async Task<EditRoomComponent> SetDescriptionAsync(string value)
     {

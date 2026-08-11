@@ -2041,18 +2041,7 @@ Assert.False
 
 inside tests.
 
-Create extension methods instead.
-
-Example: 
-    Correct : 
-    
-        room.ShouldMatch(expected);
-        
-        bookings.ShouldContainBooking(request);
-    
-    Wrong :
-    
-        Assert.AreEqual(...)
+Use Playwright's built-in Expect API from Microsoft.Playwright.Assertions for UI assertions. Assertions must be kept in dedicated assertion classes, not inside Page Objects. Use AwesomeAssertions for non-UI object/data assertions.
 
 
 # Builder Rules
@@ -2699,3 +2688,41 @@ Steps must never depend on:
 Steps belong to the RPB.Business layer.
 
 Tests orchestrate Steps and perform assertions.
+
+## Playwright UI Locators
+
+- Prefer hierarchical locators that reflect the actual UI structure:
+  parent/container -> child element.
+- Define a locator for the main UI container first, then derive child locators from it.
+- Example:
+  
+  private ILocator BookingCard =>
+      Page.Locator("//div[contains(@class,'booking-card')]");
+
+  private ILocator ConfirmationTitle =>
+      BookingCard.Locator(".//h2");
+
+  private ILocator ConfirmationMessage =>
+      BookingCard.Locator(".//p[1]");
+
+## Jira Test Metadata and Categories
+
+- Every automated test generated from a Jira issue MUST contain:
+  csharp
+  [Property("JiraKey", "RBP-XX")]
+  using the exact Jira issue key.
+
+The Jira key is used for test-to-Jira traceability and MUST NOT be omitted.
+Jira labels describing the test type must be preserved as NUnit [Category] attributes when applicable.
+Examples:
+Regression -> [Category("Regression")]
+Smoke -> [Category("Smoke")]
+API -> [Category("API")]
+UI -> [Category("UI")]
+E2E -> [Category("E2E")]
+Do not convert the Jira issue key into a Category.
+Do not replace [Property("JiraKey", "...")] with a Category.
+Keep Jira identity and test classification separate:
+Property("JiraKey", "...") = Jira traceability
+Category("...") = test classification/filtering
+Preserve all relevant test-type labels from Jira when generating the test.
