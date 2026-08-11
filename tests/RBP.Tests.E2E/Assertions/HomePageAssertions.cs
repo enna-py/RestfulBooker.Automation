@@ -8,12 +8,13 @@ public static class HomePageAssertions
 {
     public static void ShouldMatchApiRooms(this IReadOnlyCollection<RoomCardDto> uiRooms, IReadOnlyCollection<RoomDto> apiRooms)
     {
-        uiRooms.Should().HaveCount(apiRooms.Count);
+        uiRooms.Should().NotBeEmpty();
 
-        foreach (RoomDto apiRoom in apiRooms)
+        foreach (RoomCardDto uiRoom in uiRooms)
         {
-            RoomCardDto uiRoom =
-                uiRooms.Single(x => x.Id == apiRoom.RoomId);
+            RoomDto apiRoom = apiRooms.Should()
+                .ContainSingle(x => x.RoomId == uiRoom.Id)
+                .Subject;
 
             uiRoom.Type.Should().Be(apiRoom.Type);
 

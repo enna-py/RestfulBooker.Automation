@@ -1,4 +1,5 @@
 ﻿using RestfulBooker.Api.Clients;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Tests.Base;
 
@@ -12,7 +13,7 @@ public abstract class BaseApiFixture : BaseFixture
     {
         ConfigurationService.Initialize();
 
-        AuthClient = new AuthApiClient();
+        AuthClient = new AuthApiClient(new AuthenticationState());
 
         await AuthClient.LoginAsync();
     }

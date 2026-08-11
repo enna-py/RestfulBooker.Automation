@@ -12,6 +12,7 @@ namespace RBP.Tests.E2E.Base;
 public abstract class BaseFixture
 {
     protected BrowserSession Browser = null!;
+    protected AuthenticationState AuthState = null!;
     protected AuthApiClient AuthApiClient = null!;
     protected BookingApiClient BookingApiClient = null!;
     protected RoomApiClient RoomApiClient = null!;
@@ -74,9 +75,10 @@ public abstract class BaseFixture
             });
 
         Page = await Context.NewPageAsync();
-        AuthApiClient = new AuthApiClient();
-        BookingApiClient = new BookingApiClient();
-        RoomApiClient = new RoomApiClient();
+        AuthState = new AuthenticationState();
+        AuthApiClient = new AuthApiClient(AuthState);
+        BookingApiClient = new BookingApiClient(AuthState);
+        RoomApiClient = new RoomApiClient(AuthState);
     }
 
     [TearDown]
@@ -88,8 +90,6 @@ public abstract class BaseFixture
 
         LoggerManager.Logger.Information(
             $"Finished test: {TestContext.CurrentContext.Test.Name}");
-    
-        TokenProvider.SignOut();
     }
 
     protected TPage CreatePage<TPage>()

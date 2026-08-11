@@ -1,6 +1,7 @@
 ﻿using RBP.Core.Helpers;
 using RestfulBooker.Api.Base;
 using RestfulBooker.Api.Endpoints;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Data.DTO;
 using RestfulBooker.Data.DTO.Common;
@@ -10,8 +11,8 @@ namespace RestfulBooker.Api.Clients;
 
 public sealed class RoomApiClient : BaseApiClient
 {
-    public RoomApiClient()
-        : base(ConfigurationService.Current.Api.RoomUrl)
+    public RoomApiClient(AuthenticationState authState)
+        : base(ConfigurationService.Current.Api.RoomUrl, authState)
     {
     }
 

@@ -14,8 +14,8 @@ namespace RestfulBooker.Api.Clients;
 
 public sealed class AuthApiClient : BaseApiClient
 {
-    public AuthApiClient()
-        : base(ConfigurationService.Current.Api.AuthUrl)
+    public AuthApiClient(AuthenticationState authState)
+        : base(ConfigurationService.Current.Api.AuthUrl, authState)
     {
     }
     public async Task LoginAsync(LoginRequest request)
@@ -43,7 +43,7 @@ public sealed class AuthApiClient : BaseApiClient
             .Substring(cookie.IndexOf('=') + 1)
             .Split(';')[0];
 
-        TokenProvider.Authenticate(token);
+        AuthState.Token = token;
     }
 
     public Task LoginAsync()
@@ -67,7 +67,7 @@ public sealed class AuthApiClient : BaseApiClient
 
         if (response.IsSuccessful)
         {
-            TokenProvider.SignOut();
+            AuthState.Token = string.Empty;
         }
 
         return response;

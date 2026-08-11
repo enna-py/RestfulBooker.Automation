@@ -11,8 +11,9 @@ namespace RestfulBooker.Api.Base;
 public abstract class BaseApiClient
 {
     protected readonly RestClient Client;
+    protected readonly AuthenticationState AuthState;
 
-    protected BaseApiClient(string baseUrl)
+    protected BaseApiClient(string baseUrl, AuthenticationState authState)
     {
         var options = new RestClientOptions
         {
@@ -21,6 +22,7 @@ public abstract class BaseApiClient
         };
 
         Client = new RestClient(options);
+        AuthState = authState;
     }
 
     protected async Task<ApiResponse<TResponse>> GetAsync<TResponse>(
@@ -183,17 +185,17 @@ public abstract class BaseApiClient
             "Unknown API error.");
     }
 
-    private static void AttachAuthentication(RestRequest request)
+    private void AttachAuthentication(RestRequest request)
     {
         LoggerManager.Logger.Information(
             "AttachAuthentication. Authenticated={Authenticated}, Token={Token}",
-            TokenProvider.IsAuthenticated,
-            TokenProvider.Token);
+            AuthState.IsAuthenticated,
+            AuthState.Token);
 
-        if (!TokenProvider.IsAuthenticated)
+        if (!AuthState.IsAuthenticated)
             return;
 
-        request.AddCookie("token", TokenProvider.Token);
+        request.AddCookie("token", AuthState.Token);
 
         LoggerManager.Logger.Information("Cookie added.");
     }

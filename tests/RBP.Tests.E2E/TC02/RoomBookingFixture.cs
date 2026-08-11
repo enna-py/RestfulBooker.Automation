@@ -4,7 +4,6 @@ using RBP.Data.DTO.Booking;
 using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
 using RestfulBooker.Api.Clients;
-using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Logging;
 
 namespace RBP.Tests.E2E.TC02;
@@ -36,8 +35,8 @@ public class RoomBookingFixture : BaseFixture
         await AuthApiClient.LoginAsync();
         LoggerManager.Logger.Information(
             "After login: Authenticated={Auth}, Token={Token}",
-            TokenProvider.IsAuthenticated,
-            TokenProvider.Token);
+            AuthState.IsAuthenticated,
+            AuthState.Token);
 
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
 

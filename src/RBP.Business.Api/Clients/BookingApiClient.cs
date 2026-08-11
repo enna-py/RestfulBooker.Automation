@@ -2,6 +2,7 @@
 using RBP.Data.DTO.Booking;
 using RestfulBooker.Api.Base;
 using RestfulBooker.Api.Factories;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Core.Exceptions;
 using RestfulBooker.Data.DTO.Common;
@@ -11,8 +12,8 @@ namespace RBP.Business.Api.Clients;
 
 public sealed class BookingApiClient : BaseApiClient
 {
-    public BookingApiClient()
-        : base(ConfigurationService.Current.Api.BookingUrl)
+    public BookingApiClient(AuthenticationState authState)
+        : base(ConfigurationService.Current.Api.BookingUrl, authState)
     {
     }
 

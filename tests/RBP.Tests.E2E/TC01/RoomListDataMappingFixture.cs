@@ -17,7 +17,13 @@ public class RoomListDataMappingFixture : BaseFixture
     {
         IReadOnlyCollection<RoomDto> apiRooms = await RoomApiClient.GetRoomsAsync();
 
+        DateOnly checkIn = DateOnly.FromDateTime(DateTime.Today.AddDays(Random.Shared.Next(1, 15)));
+
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
+
+        await homePage.FillBookingDatesAsync(checkIn, checkIn.AddDays(1));
+
+        await homePage.UpdateRoomList();
 
         IReadOnlyCollection<RoomCardDto> uiRooms = await homePage.GetRoomsAsync();
 

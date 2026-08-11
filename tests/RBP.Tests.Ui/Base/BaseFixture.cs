@@ -3,7 +3,6 @@ using NUnit.Framework.Interfaces;
 using RBP.Business.Ui.Browser;
 using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pages.Admin;
-using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Core.Logging;
 
@@ -94,8 +93,6 @@ public abstract class BaseFixture
         finally
         {
             await Context.CloseAsync();
-
-            TokenProvider.SignOut();
 
             LoggerManager.Logger.Information(
                 "Finished test: {TestName}",

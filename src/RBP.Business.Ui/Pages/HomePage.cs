@@ -49,7 +49,9 @@ public sealed class HomePage : BasePage
         await CheckAvailability.IsVisibleAsync();
 
         await CheckAvailability.ClickAsync();
-        
+
+        await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+
         return this;
     }
 

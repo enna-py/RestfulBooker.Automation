@@ -1,4 +1,5 @@
 ﻿using RestfulBooker.Api.Clients;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Tests.Base;
 
 namespace RestfulBooker.Tests.Smoke;
@@ -13,6 +14,6 @@ public class LoginTestsFixture : BaseFixture
     {
         base.Setup();
 
-        _authClient = new AuthApiClient();
+        _authClient = new AuthApiClient(new AuthenticationState());
     }
 }

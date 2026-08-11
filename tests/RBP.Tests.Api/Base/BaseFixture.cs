@@ -1,4 +1,5 @@
 ﻿using RestfulBooker.Api.Clients;
+using RestfulBooker.Core.Authentication;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Core.Logging;
 
@@ -45,7 +46,7 @@ public abstract class BaseFixture
     {
         LoggerManager.Logger.Information(
             $"Starting test: {TestContext.CurrentContext.Test.Name}");
-        AuthApiClient = new AuthApiClient();
+        AuthApiClient = new AuthApiClient(new AuthenticationState());
     }
 
     [TearDown]
