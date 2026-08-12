@@ -28,4 +28,11 @@ public static class HomePageAssertions
                 .BeEquivalentTo(apiRoom.Features);
         }
     }
+
+    public static void ShouldHaveRoomCount(
+        this IReadOnlyCollection<RoomCardDto> uiRooms,
+        int expectedCount)
+    {
+        uiRooms.Should().HaveCount(expectedCount);
+    }
 }
