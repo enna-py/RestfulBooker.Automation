@@ -10,7 +10,7 @@ using RestSharp;
 
 namespace RBP.Business.Api.Clients;
 
-public sealed class BookingApiClient : BaseApiClient
+public sealed class BookingApiClient : BaseApiClient, IBookingApiClient
 {
     public BookingApiClient(AuthenticationState authState)
         : base(ConfigurationService.Current.Api.BookingUrl, authState)
@@ -32,5 +32,39 @@ public sealed class BookingApiClient : BaseApiClient
         }
 
         return response.Data;
+    }
+
+    public async Task<ApiResponse<BookingCreationResponse>> CreateBookingAsync(
+        BookingRequest request,
+        bool validateResponse = true)
+    {
+        BookingApiRequest body = new()
+        {
+            RoomId = request.RoomId,
+            FirstName = request.Guest.FirstName,
+            LastName = request.Guest.LastName,
+            DepositPaid = true,
+            Email = request.Guest.Email,
+            Phone = request.Guest.Phone,
+            BookingDates = new BookingDatesDto
+            {
+                CheckIn = request.CheckIn,
+                CheckOut = request.CheckOut
+            }
+        };
+
+        return await PostAsync<BookingApiRequest, BookingCreationResponse>(
+            BookingEndpoints.Bookings,
+            body,
+            validateResponse);
+    }
+
+    public async Task<IReadOnlyCollection<BookingDto>> GetBookingsByRoomAsync(int roomId)
+    {
+        ApiResponse<BookingListDto> response =
+            await GetAsync<BookingListDto>(
+                BookingEndpoints.ByRoom(roomId));
+
+        return response.Data?.Bookings ?? [];
     }
 }
