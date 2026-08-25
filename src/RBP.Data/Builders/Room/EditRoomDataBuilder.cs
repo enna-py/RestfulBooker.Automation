@@ -1,13 +1,9 @@
-﻿using RBP.Data.DTO.Room;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RBP.Data.DTO.Room;
+using RestfulBooker.Data.Builders.Base;
 
-namespace RBP.Tests.Ui.Builders.Room;
+namespace RBP.Data.Builders.Room;
 
-public sealed class EditRoomDataBuilder
+public sealed class EditRoomDataBuilder : BaseBuilder<RoomCardDto>
 {
     private int _id;
     private string _type = "room type";
@@ -28,10 +24,11 @@ public sealed class EditRoomDataBuilder
 
     public EditRoomDataBuilder WithId(int value)
     {
-        _id = value; 
+        _id = value;
 
         return this;
     }
+
     public EditRoomDataBuilder WithType(string value)
     {
         _type = value;
@@ -67,7 +64,7 @@ public sealed class EditRoomDataBuilder
         return this;
     }
 
-    public RoomCardDto Build()
+    public override RoomCardDto Build()
     {
         return new RoomCardDto
         {

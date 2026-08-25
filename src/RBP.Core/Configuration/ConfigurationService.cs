@@ -75,6 +75,12 @@ public static class ConfigurationService
 
         RequireValidUri(api.BookingUrl,
             $"{nameof(ApiSettings)}.{nameof(ApiSettings.BookingUrl)}");
+
+        RequireValidUri(api.MessageUrl,
+            $"{nameof(ApiSettings)}.{nameof(ApiSettings.MessageUrl)}");
+
+        RequireValidUri(api.BrandingUrl,
+            $"{nameof(ApiSettings)}.{nameof(ApiSettings.BrandingUrl)}");
     }
 
     private static void ValidateUi(UiSettings ui)

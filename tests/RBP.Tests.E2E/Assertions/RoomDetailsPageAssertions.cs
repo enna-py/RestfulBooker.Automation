@@ -1,6 +1,4 @@
-﻿using AwesomeAssertions;
-using RBP.Business.Ui.Pagesl;
-using RBP.Data.DTO.Booking;
+﻿using RBP.Business.Ui.Pagesl;
 using RestfulBooker.Core.Logging;
 using static Microsoft.Playwright.Assertions;
 
@@ -15,21 +13,5 @@ public static class RoomDetailsPageAssertions
 
         await Expect(page.ConfirmationTitle).ToHaveTextAsync("Booking Confirmed");
         await Expect(page.ConfirmationMessage).ToHaveTextAsync("Your booking has been confirmed for the following dates:");
-    }
-
-    public static void ShouldContainBooking(
-    this IEnumerable<BookingDto> bookings,
-    BookingRequest request)
-    {
-        bookings.Should().Contain(b =>
-            b.FirstName == request.Guest.FirstName &&
-            b.LastName == request.Guest.LastName &&
-            b.BookingDates.CheckIn == request.CheckIn &&
-            b.BookingDates.CheckOut == request.CheckOut);
-    }
-
-    public static void ShouldMatch(this BookingDto actual, BookingDto expected)
-    {
-        actual.Should().BeEquivalentTo(expected, options => options.ComparingByMembers<BookingDto>());
     }
 }

@@ -5,7 +5,7 @@ using RBP.Tests.E2E.Base;
 using RestfulBooker.Api.Clients;
 using RestfulBooker.Data.DTO;
 
-namespace RBP.Tests.E2E.TC01;
+namespace RBP.Tests.E2E.Room;
 
 public class RoomListDataMappingFixture : BaseFixture
 {

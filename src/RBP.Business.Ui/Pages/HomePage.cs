@@ -21,12 +21,39 @@ public sealed class HomePage : BasePage
         .Locator("xpath=following::input[1]");
     private ILocator CheckAvailability => Page.Locator("#booking .btn");
 
+    public ILocator ContactConfirmationMessage =>
+        Page.GetByText("Thanks for getting in touch");
+
+    private ILocator ContactInfoCard =>
+        Page.Locator(".card-body").Filter(new() { HasText = "Contact Information" });
+
+    public ILocator BrandingTitle =>
+        Page.Locator("section.hero h1");
+
+    public ILocator BrandingDescription =>
+        Page.Locator("section.hero p.lead");
+
+    public ILocator BrandingAddress =>
+        ContactInfoCard.Locator("h5:text-is('Address') + p");
+
+    public ILocator BrandingPhone =>
+        ContactInfoCard.Locator("h5:text-is('Phone') + p");
+
+    public ILocator BrandingEmail =>
+        ContactInfoCard.Locator("h5:text-is('Email') + p");
+
+    public ILocator BrandingDirections =>
+        ContactInfoCard.Locator("h4:text-is('Getting Here') + p");
+
     public BookingFormComponent BookingForm { get; }
+
+    public ContactFormComponent ContactForm { get; }
 
     public HomePage(IPage page)
     : base(page)
     {
         BookingForm = new BookingFormComponent(page);
+        ContactForm = new ContactFormComponent(page);
     }
 
     public async Task<HomePage> OpenAsync()
@@ -35,6 +62,16 @@ public sealed class HomePage : BasePage
             "Opening Home page");
 
         await Page.GotoAsync(ConfigurationService.Current.Ui.BaseUrl);
+
+        return this;
+    }
+
+    public async Task<HomePage> ReloadAsync()
+    {
+        LoggerManager.Logger.Information(
+            "Reloading Home page");
+
+        await Page.ReloadAsync();
 
         return this;
     }

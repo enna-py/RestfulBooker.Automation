@@ -1,4 +1,5 @@
 using Microsoft.Playwright;
+using RBP.Business.Ui.Components;
 using RestfulBooker.Core.Configuration;
 using RestfulBooker.Core.Logging;
 
@@ -25,6 +26,34 @@ public sealed class AdminMessagesPage : BasePage
 
         await Page.GotoAsync(
             $"{ConfigurationService.Current.Ui.BaseUrl}/admin/message");
+
+        return this;
+    }
+
+    public async Task<MessageDetailComponent> OpenMessageAsync(string identifier)
+    {
+        LoggerManager.Logger.Information(
+            "Opening message '{Identifier}'",
+            identifier);
+
+        await MessageRow(identifier).ClickAsync();
+
+        return new MessageDetailComponent(Page);
+    }
+
+    public async Task<AdminMessagesPage> DeleteMessageAsync(string identifier)
+    {
+        LoggerManager.Logger.Information(
+            "Deleting message '{Identifier}'",
+            identifier);
+
+        var deleteResponse = Page.WaitForResponseAsync(r =>
+            r.Url.Contains("/api/message/") &&
+            r.Request.Method == "DELETE");
+
+        await MessageRow(identifier).Locator(".roomDelete").ClickAsync();
+
+        await deleteResponse;
 
         return this;
     }

@@ -21,4 +21,15 @@ public static class AdminMessagesPageAssertions
 
         await Expect(message).ToContainTextAsync("You have a new booking!");
     }
+
+    public static async Task ShouldNotContainMessage(
+    this AdminMessagesPage page,
+    string identifier)
+    {
+        LoggerManager.Logger.Information(
+            "Verify message '{Identifier}' is no longer displayed",
+            identifier);
+
+        await Expect(page.MessageRow(identifier)).Not.ToBeVisibleAsync();
+    }
 }

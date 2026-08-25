@@ -1,6 +1,7 @@
 ﻿using Microsoft.Playwright;
 using RBP.Business.Ui.Pages.Admin;
 using RBP.Data.DTO.Room;
+using RestfulBooker.Core.Logging;
 
 namespace RBP.Business.Ui.Components;
 
@@ -33,29 +34,56 @@ public sealed class EditRoomComponent
 
     public async Task<EditRoomComponent> SetDescriptionAsync(string value)
     {
+        LoggerManager.Logger.Information(
+            "Setting room description to '{Description}'",
+            value);
+
         await Description.FillAsync(value);
         return this;
     }
 
     public async Task<EditRoomComponent> SetPriceAsync(decimal value)
     {
+        LoggerManager.Logger.Information(
+            "Setting room price to '{Price}'",
+            value);
+
         await Price.FillAsync(value.ToString());
         return this;
     }
 
-    public async Task<AdminRoomsPage> FillAsync(RoomCardDto room)
+    public async Task<EditRoomComponent> SetImageAsync(string value)
     {
-        await Description.FillAsync(room.Description);
+        LoggerManager.Logger.Information(
+            "Setting room image to '{Image}'",
+            value);
 
-        await Price.FillAsync(room.Price.ToString());
+        await Image.FillAsync(value);
+        return this;
+    }
+
+    public async Task<EditRoomComponent> FillAsync(RoomCardDto room)
+    {
+        LoggerManager.Logger.Information(
+            "Filling room edit form with updated room data");
+
+        await SetDescriptionAsync(room.Description);
+
+        await SetPriceAsync(room.Price);
+
+        await SetImageAsync(room.Image);
 
         await SelectFeaturesAsync(room.Features.ToArray());
 
-        return new AdminRoomsPage(_page);
+        return this;
     }
 
     public async Task<EditRoomComponent> SelectFeaturesAsync(params string[] features)
     {
+        LoggerManager.Logger.Information(
+            "Selecting room features: {Features}",
+            string.Join(", ", features));
+
         IReadOnlyList<string> all =
         [
             "TV",
@@ -81,10 +109,22 @@ public sealed class EditRoomComponent
 
         return this;
     }
-    public async Task<AdminRoomsPage> SaveAsync()
+    public async Task<AdminRoomDetailsPage> SaveAsync()
     {
+        LoggerManager.Logger.Information(
+            "Saving room changes");
+
+        // Saving resets the room state (clearing price/image) before an async
+        // re-fetch repopulates the read-only summary - wait for that re-fetch
+        // to complete so callers don't read the transient empty state.
+        var refetchResponse = _page.WaitForResponseAsync(r =>
+            r.Url.Contains("/api/room/") &&
+            r.Request.Method == "GET");
+
         await Update.ClickAsync();
 
-        return new AdminRoomsPage(_page);
+        await refetchResponse;
+
+        return new AdminRoomDetailsPage(_page);
     }
 }

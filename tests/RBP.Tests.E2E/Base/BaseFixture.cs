@@ -16,8 +16,14 @@ public abstract class BaseFixture
     protected AuthApiClient AuthApiClient = null!;
     protected BookingApiClient BookingApiClient = null!;
     protected RoomApiClient RoomApiClient = null!;
+    protected MessageApiClient MessageApiClient = null!;
+    protected BrandingApiClient BrandingApiClient = null!;
     protected IBrowserContext Context = null!;
     protected IPage Page = null!;
+
+    private readonly List<int> _roomIdsToCleanUp = [];
+    private readonly List<int> _bookingIdsToCleanUp = [];
+    private readonly List<Func<Task>> _cleanupActions = [];
 
     [OneTimeSetUp]
     public async Task GlobalSetup()
@@ -79,6 +85,8 @@ public abstract class BaseFixture
         AuthApiClient = new AuthApiClient(AuthState);
         BookingApiClient = new BookingApiClient(AuthState);
         RoomApiClient = new RoomApiClient(AuthState);
+        MessageApiClient = new MessageApiClient(AuthState);
+        BrandingApiClient = new BrandingApiClient(AuthState);
     }
 
     [TearDown]
@@ -86,7 +94,14 @@ public abstract class BaseFixture
     {
         await SaveScreenshotOnFailureAsync();
 
-        await Context.CloseAsync();
+        try
+        {
+            await CleanUpTrackedTestDataAsync();
+        }
+        finally
+        {
+            await Context.CloseAsync();
+        }
 
         LoggerManager.Logger.Information(
             $"Finished test: {TestContext.CurrentContext.Test.Name}");
@@ -98,6 +113,47 @@ public abstract class BaseFixture
         return (TPage)Activator.CreateInstance(
             typeof(TPage),
             Page)!;
+    }
+
+    protected void TrackRoomForCleanup(int roomId)
+    {
+        _roomIdsToCleanUp.Add(roomId);
+    }
+
+    protected void TrackBookingForCleanup(int bookingId)
+    {
+        _bookingIdsToCleanUp.Add(bookingId);
+    }
+
+    protected void RegisterCleanupAction(Func<Task> action)
+    {
+        _cleanupActions.Add(action);
+    }
+
+    private async Task CleanUpTrackedTestDataAsync()
+    {
+        // Bookings are deleted before their rooms so a room delete never
+        // races ahead of the booking that references it.
+        foreach (int bookingId in _bookingIdsToCleanUp)
+        {
+            await BookingApiClient.DeleteBookingAsync(bookingId);
+        }
+
+        _bookingIdsToCleanUp.Clear();
+
+        foreach (int roomId in _roomIdsToCleanUp)
+        {
+            await RoomApiClient.DeleteRoomAsync(roomId);
+        }
+
+        _roomIdsToCleanUp.Clear();
+
+        foreach (Func<Task> action in _cleanupActions)
+        {
+            await action();
+        }
+
+        _cleanupActions.Clear();
     }
 
     private async Task SaveScreenshotOnFailureAsync()

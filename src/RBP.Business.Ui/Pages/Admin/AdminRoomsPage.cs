@@ -10,7 +10,11 @@ public sealed class AdminRoomsPage : BasePage
     public AdminRoomsPage(IPage page)
         : base(page)
     {
+        CreateRoomForm = new CreateRoomComponent(page);
     }
+
+    public CreateRoomComponent CreateRoomForm { get; }
+
     public async Task<AdminRoomsPage> OpenAsync()
     {
         await Page.GotoAsync(ConfigurationService.Current.Ui.BaseUrl + "/admin/rooms");
@@ -20,22 +24,20 @@ public sealed class AdminRoomsPage : BasePage
     private ILocator RoomItems =>
         Page.GetByTestId("roomlisting");
 
-    private ILocator RoomItem(int roomId) =>
+    public ILocator RoomItem(string roomName) =>
         RoomItems.Filter(new()
         {
-            Has = Page.Locator($"#roomName{roomId + 100}")
+            Has = Page.Locator($"#roomName{roomName}")
         });
 
-    public async Task<EditRoomComponent> OpenEditRoomAsync(int roomId)
+    public async Task<EditRoomComponent> OpenEditRoomAsync(string roomName)
     {
         LoggerManager.Logger.Information(
-            "Opening edit form for room {RoomId}",
-            roomId);
+            "Opening edit form for room '{RoomName}'",
+            roomName);
 
-        await RoomItem(roomId).ClickAsync();
+        await RoomItem(roomName).ClickAsync();
 
-        await Page.GetByRole(AriaRole.Button, new() { Name = "Edit" }).ClickAsync();
-
-        return new EditRoomComponent(Page);
+        return await new AdminRoomDetailsPage(Page).OpenRoomEditAsync();
     }
 }

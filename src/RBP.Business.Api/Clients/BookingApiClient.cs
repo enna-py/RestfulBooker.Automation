@@ -67,4 +67,13 @@ public sealed class BookingApiClient : BaseApiClient, IBookingApiClient
 
         return response.Data?.Bookings ?? [];
     }
+
+    public async Task<ApiResponse<object>> DeleteBookingAsync(
+        int bookingId,
+        bool validateResponse = true)
+    {
+        return await DeleteAsync<object>(
+            BookingEndpoints.ById(bookingId),
+            validateResponse);
+    }
 }

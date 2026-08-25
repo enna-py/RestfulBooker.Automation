@@ -1,7 +1,7 @@
-﻿using AwesomeAssertions;
+using AwesomeAssertions;
 using RBP.Data.DTO.Room;
 
-namespace RBP.Tests.Ui.Assertions;
+namespace RBP.Tests.E2E.Assertions;
 
 public static class RoomCardAssertions
 {

@@ -41,6 +41,13 @@ public sealed class RoomApiRequestBuilder : BaseBuilder<RoomApiRequest>
         return this;
     }
 
+    public RoomApiRequestBuilder WithFeatures(params string[] values)
+    {
+        _features = values;
+
+        return this;
+    }
+
     public override RoomApiRequest Build()
     {
         return new RoomApiRequest

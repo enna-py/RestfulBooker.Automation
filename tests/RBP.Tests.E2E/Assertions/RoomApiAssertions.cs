@@ -1,6 +1,7 @@
 using AwesomeAssertions;
 using RestfulBooker.Data.DTO;
 using RestfulBooker.Data.DTO.Common;
+using RestfulBooker.Data.DTO.Room;
 
 namespace RBP.Tests.E2E.Assertions;
 
@@ -17,5 +18,13 @@ public static class RoomApiAssertions
         int roomId)
     {
         rooms.Should().NotContain(r => r.RoomId == roomId);
+    }
+
+    public static void ShouldMatch(this RoomDto actual, RoomApiRequest expected)
+    {
+        actual.Type.Should().Be(expected.Type);
+        actual.Accessible.Should().Be(expected.Accessible);
+        actual.RoomPrice.Should().Be(expected.RoomPrice);
+        actual.Features.Should().BeEquivalentTo(expected.Features);
     }
 }

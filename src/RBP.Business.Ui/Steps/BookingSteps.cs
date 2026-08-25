@@ -6,22 +6,25 @@ namespace RBP.Business.Ui.Steps;
 
 public sealed class BookingSteps
 {
-    private readonly HomePage _homePage;
+    private readonly HomePage? _homePage;
+    private readonly RoomDetailsPage? _roomDetailsPage;
 
     public BookingSteps(HomePage homePage)
     {
         _homePage = homePage;
     }
 
+    public BookingSteps(RoomDetailsPage roomDetailsPage)
+    {
+        _roomDetailsPage = roomDetailsPage;
+    }
+
     public async Task<(RoomDetailsPage Page, BookingDto Booking)> BookRoomAsync(
         BookingRequest request)
     {
-        await _homePage.FillBookingDatesAsync(
-            request.CheckIn,
-            request.CheckOut);
-
-        RoomDetailsPage roomDetailsPage =
-            await _homePage.OpenRoomAsync(request.RoomId);
+        RoomDetailsPage roomDetailsPage = _roomDetailsPage is not null
+            ? await _roomDetailsPage.OpenAsync(request.RoomId, request.CheckIn, request.CheckOut)
+            : await OpenRoomFromHomePageAsync(request);
 
         await roomDetailsPage.ReserveNowAsync();
 
@@ -32,5 +35,14 @@ public sealed class BookingSteps
         BookingDto booking = await roomDetailsPage.BookingForm.SubmitAsync();
 
         return (roomDetailsPage, booking);
+    }
+
+    private async Task<RoomDetailsPage> OpenRoomFromHomePageAsync(BookingRequest request)
+    {
+        await _homePage!.FillBookingDatesAsync(
+            request.CheckIn,
+            request.CheckOut);
+
+        return await _homePage.OpenRoomAsync(request.RoomId);
     }
 }

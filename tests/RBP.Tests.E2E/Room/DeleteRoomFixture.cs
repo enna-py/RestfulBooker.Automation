@@ -7,7 +7,7 @@ using RestfulBooker.Data.DTO;
 using RestfulBooker.Data.DTO.Common;
 using RestfulBooker.Data.DTO.Room;
 
-namespace RBP.Tests.E2E.TC04;
+namespace RBP.Tests.E2E.Room;
 
 public class DeleteRoomFixture : BaseFixture
 {
