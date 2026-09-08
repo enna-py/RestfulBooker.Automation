@@ -1,6 +1,6 @@
 {
 
-  "enabled": true,
+  "enabled": false,
 
   "server": {
 
@@ -8,7 +8,7 @@
 
     "project": "olena_pomazan1_personal",
 
-    "apiKey": "RBP_Bo0KzOpFRhSSnmiXq7TJrBRpWKqdIIvSVVxueVys-f4cEfBQom3qJy_BOAQwkm_y"
+    "apiKey": ""
 
   },
 

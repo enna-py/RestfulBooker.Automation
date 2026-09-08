@@ -1,5 +1,5 @@
-﻿using RBP.Business.Ui.Assertions;
-using RBP.Business.Ui.Pages;
+﻿using RBP.Business.Ui.Pages;
+using RBP.Tests.Ui.Assertions;
 using RBP.Tests.Ui.Base;
 
 namespace RBP.Tests.Ui.HomePageFixtures
@@ -12,7 +12,7 @@ namespace RBP.Tests.Ui.HomePageFixtures
             HomePage homePage = await CreatePage<HomePage>()
                 .OpenAsync();
 
-            homePage.ShouldBeOpen();
+            await homePage.ShouldBeOpen();
         }
     }
 }

@@ -2,7 +2,7 @@ using AwesomeAssertions;
 using RBP.Data.DTO.Message;
 
 namespace RBP.Tests.E2E.Assertions;
-
+// todo remove duplication
 public static class MessageAssertions
 {
     public static void ShouldMatch(this ContactMessageRequest actual, ContactMessageRequest expected)

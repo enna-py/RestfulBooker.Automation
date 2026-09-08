@@ -11,4 +11,6 @@ public abstract class BasePage
     }
 
     public string Url => Page.Url;
+
+    public IPage PlaywrightPage => Page;
 }

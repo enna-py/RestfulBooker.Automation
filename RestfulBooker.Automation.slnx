@@ -1,21 +1,21 @@
 <Solution>
   <Folder Name="/config/">
-    <File Path="/appsettings.json" />
-    <File Path="/appsettings.local.json" />
-    <File Path="/ReportPortal.config.json" />
+    <File Path="config/appsettings.json" />
+    <File Path="config/ReportPortal.config.json" />
   </Folder>
   <Folder Name="/Solution Items/">
+    <File Path="CLAUDE.md" />
     <File Path="README.md" />
   </Folder>
-  <Folder Name="/">
+  <Folder Name="/src/">
     <Project Path="src/RBP.Business.Ui/RBP.Business.Ui.csproj" Id="f7a88bd7-1e2a-4419-8362-845d670ab90f" />
-    <Project Path="RBP.Business.Api/RBP.Business.Api.csproj" />
-    <Project Path="RestfulBooker.Core/RBP.Core.csproj" />
-    <Project Path="RestfulBooker.Data/RBP.Data.csproj" />
+    <Project Path="src/RBP.Business.Api/RBP.Business.Api.csproj" />
+    <Project Path="src/RBP.Core/RBP.Core.csproj" />
+    <Project Path="src/RBP.Data/RBP.Data.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="E2E/RBP.Tests.E2E.csproj" Id="f41c0c18-a273-4aac-ae58-c182dd13a9b5" />
-    <Project Path="RestfulBooker.Tests/RBP.Tests.Api.csproj" />
-    <Project Path="UI/RBP.Tests.Ui.csproj" Id="bd653b6b-24aa-45fc-9494-c1dcac9aa1ca" />
+    <Project Path="tests/RBP.Tests.E2E/RBP.Tests.E2E.csproj" Id="f41c0c18-a273-4aac-ae58-c182dd13a9b5" />
+    <Project Path="tests/RBP.Tests.Api/RBP.Tests.Api.csproj" />
+    <Project Path="tests/RBP.Tests.Ui/RBP.Tests.Ui.csproj" Id="bd653b6b-24aa-45fc-9494-c1dcac9aa1ca" />
   </Folder>
 </Solution>

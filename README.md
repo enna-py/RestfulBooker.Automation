@@ -51,7 +51,7 @@ RestfulBooker.Automation
 - **Component Object** — reusable UI fragments shared across pages (e.g. `RoomCardComponent`, `BookingFormComponent`).
 - **Builder** — fluent, immutable test-data construction for DTOs (e.g. `RoomApiRequestBuilder`, `EditRoomDataBuilder`).
 - **Steps** — business-workflow orchestration across Pages/Components (e.g. `BookingSteps`, `AuthenticationSteps`); no assertions.
-- **Factory** — request/client construction (`RequestFactory`, `RestClientFactory`, `BrowserFactory`).
+- **Factory** — request/client construction (`RequestFactory`, `BrowserFactory`).
 - **Fluent API** — UI-mutating methods return `this`; navigation methods return the destination Page Object.
 
 Assertions live only in dedicated Assertion classes (`tests/**/Assertions`) — never inline `Assert.*` calls in test bodies.
@@ -159,7 +159,20 @@ public async Task Edit_Room_Via_Admin_Panel_Should_Update_Admin_Room_List()
 ## Logging & Reporting
 
 - Every user action (navigation, click, form submit, API call/response) is logged via Serilog to `Logs/` and the console.
-- Test results, logs, and — on failure — a screenshot and exception details are published to ReportPortal when `ReportPortal.Endpoint` is configured.
+- Test results, logs, and — on failure — a screenshot and exception details are published to ReportPortal when enabled.
+
+### Enabling ReportPortal locally
+
+ReportPortal reporting is driven by the `ReportPortal.json` / `reportportal.json` file in each test project (`tests/RBP.Tests.Api`, `tests/RBP.Tests.E2E`, `tests/RBP.Tests.Ui`), auto-discovered by the ReportPortal NUnit adapter at test-run time. These files are checked in with `"enabled": false` and an empty `apiKey` — no credential is ever committed.
+
+To report to ReportPortal locally, override the values via environment variables rather than editing the tracked JSON (the underlying config loader supports standard `Microsoft.Extensions.Configuration` environment-variable binding, using `__` for nesting):
+
+```bash
+export Enabled=true
+export Server__ApiKey="<your ReportPortal API key>"
+```
+
+Set these in your shell profile or a local, git-ignored `.env`-style script you source before running `dotnet test` — never in a tracked file. Unrelated: application configuration (`config/appsettings.json`) supports its own `RBP_`-prefixed environment-variable overrides via `RestfulBooker.Core.Configuration.ConfigurationService` — that mechanism is separate from the ReportPortal loader above.
 
 ## Project Status
 

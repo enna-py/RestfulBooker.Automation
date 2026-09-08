@@ -1,8 +1,8 @@
-﻿using AwesomeAssertions;
+using AwesomeAssertions;
 using RestfulBooker.Data.DTO.Common;
 using System.Net;
 
-namespace RestfulBooker.Core.Extensions;
+namespace RestfulBooker.Tests.Assertions;
 
 public static class ApiResponseExtensions
 {
