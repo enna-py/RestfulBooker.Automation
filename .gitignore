@@ -484,3 +484,5 @@ $RECYCLE.BIN/
 ## Project-specific
 # Claude Code local, machine-specific settings — never commit (may carry personal permission grants)
 .claude/settings.local.json
+# Claude Code runtime lock file — machine/session state, never commit
+.claude/scheduled_tasks.lock

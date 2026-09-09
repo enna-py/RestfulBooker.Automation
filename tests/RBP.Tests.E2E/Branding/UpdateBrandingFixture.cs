@@ -1,8 +1,10 @@
+using AwesomeAssertions;
 using RBP.Business.Ui.Pages;
 using RBP.Data.Builders.Branding;
 using RBP.Data.DTO.Branding;
 using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.DTO.Common;
 
 namespace RBP.Tests.E2E.Branding;
@@ -11,8 +13,8 @@ namespace RBP.Tests.E2E.Branding;
 public class UpdateBrandingFixture : BaseFixture
 {
     [Test]
-    [Category("E2E")]
-    [Category("Regression")]
+    [Category(TestType.E2E)]
+    [Category(TestType.Regression)]
     [Property("JiraKey", "RBP-16")]
     public async Task Branding_Should_Be_Updated_Via_Api_And_Displayed_On_Public_Site()
     {
@@ -30,7 +32,7 @@ public class UpdateBrandingFixture : BaseFixture
         ApiResponse<BrandingDto> updateResponse =
             await BrandingApiClient.UpdateBrandingAsync(updatedBranding);
 
-        updateResponse.ShouldIndicateSuccessfulUpdate();
+        updateResponse.IsSuccessful.Should().BeTrue();
 
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
 

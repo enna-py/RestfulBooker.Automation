@@ -125,7 +125,7 @@ public sealed class CreateRoomComponent
     public async Task<AdminRoomsPage> SaveAsync()
     {
         LoggerManager.Logger.Information(
-            "Creating new room");
+            "Clicking 'Create' button");
 
         var createResponse = _page.WaitForResponseAsync(r =>
             r.Url.Contains("/api/room") &&

@@ -1,9 +1,8 @@
 ﻿using RBP.Business.Ui.Pagesl;
 using RBP.Business.Ui.Steps;
 using RBP.Data.DTO.Booking;
-using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
-using RestfulBooker.Core.Logging;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.Builders.Booking;
 
 namespace RBP.Tests.E2E.Booking;
@@ -11,8 +10,8 @@ namespace RBP.Tests.E2E.Booking;
 public class RoomBookingFixture : BaseFixture
 {
     [Test]
-    [Category("Smoke")]
-    [Category("E2E")]
+    [Category(TestType.Smoke)]
+    [Category(TestType.E2E)]
     [Property("JiraKey", "RBP-8")]
     public async Task TC02_User_Should_Be_Able_To_Book_Room()
     {
@@ -27,22 +26,17 @@ public class RoomBookingFixture : BaseFixture
 
         await AuthApiClient.LoginAsync();
 
-        LoggerManager.Logger.Information(
-            "After login: Authenticated={Auth}, Token={Token}",
-            AuthState.IsAuthenticated,
-            AuthState.Token);
-
         BookingSteps bookingSteps = new(CreatePage<RoomDetailsPage>());
 
         var result = await bookingSteps.BookRoomAsync(requestModel);
 
         TrackBookingForCleanup(result.Booking.BookingId);
 
-        await result.Page.ShouldHaveSuccessfulBooking();
+        await bookingSteps.ShouldHaveSuccessfulBookingAsync(result.Page);
 
         BookingDto actualBooking = await BookingApiClient.GetBookingAsync(result.Booking.BookingId);
 
-        actualBooking.ShouldMatch(result.Booking);
+        await bookingSteps.ShouldMatchAsync(actualBooking, result.Booking);
     }
 }
 

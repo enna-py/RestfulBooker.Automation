@@ -1,8 +1,8 @@
 ﻿using RBP.Business.Ui.Pages;
-using RBP.Data.DTO.Room;
-using RBP.Tests.E2E.Assertions;
+using RBP.Business.Ui.Steps;
 using RBP.Tests.E2E.Base;
 using RestfulBooker.Api.Clients;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.DTO;
 
 namespace RBP.Tests.E2E.Room;
@@ -10,8 +10,8 @@ namespace RBP.Tests.E2E.Room;
 public class RoomListDataMappingFixture : BaseFixture
 {
     [Test]
-    [Category("Smoke")]
-    [Category("E2E")]
+    [Category(TestType.Smoke)]
+    [Category(TestType.E2E)]
     [Property("JiraKey", "RBP-7")]
     public async Task Room_List_Should_Match_Api_Data()
     {
@@ -21,12 +21,10 @@ public class RoomListDataMappingFixture : BaseFixture
 
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
 
-        await homePage.FillBookingDatesAsync(checkIn, checkIn.AddDays(1));
+        RoomListSteps roomListSteps = new(homePage);
 
-        await homePage.UpdateRoomList();
+        await roomListSteps.RefreshRoomListAsync(checkIn, checkIn.AddDays(1));
 
-        IReadOnlyCollection<RoomCardDto> uiRooms = await homePage.GetRoomsAsync();
-
-        uiRooms.ShouldMatchApiRooms(apiRooms);
+        await roomListSteps.ShouldMatchApiRoomsAsync(apiRooms);
     }
 }

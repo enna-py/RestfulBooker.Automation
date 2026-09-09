@@ -1,7 +1,8 @@
+using AwesomeAssertions;
 using RBP.Business.Ui.Pages;
-using RBP.Data.DTO.Room;
-using RBP.Tests.E2E.Assertions;
+using RBP.Business.Ui.Steps;
 using RBP.Tests.E2E.Base;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.Builders.Room;
 using RestfulBooker.Data.DTO;
 using RestfulBooker.Data.DTO.Common;
@@ -12,8 +13,8 @@ namespace RBP.Tests.E2E.Room;
 public class DeleteRoomFixture : BaseFixture
 {
     [Test]
-    [Category("E2E")]
-    [Category("Regression")]
+    [Category(TestType.E2E)]
+    [Category(TestType.Regression)]
     [Property("JiraKey", "RBP-12")]
     public async Task Deleted_Room_Should_No_Longer_Be_Available()
     {
@@ -21,9 +22,11 @@ public class DeleteRoomFixture : BaseFixture
 
         HomePage homePage = await CreatePage<HomePage>().OpenAsync();
 
-        await homePage.UpdateRoomList();
+        RoomListSteps roomListSteps = new(homePage);
 
-        int visibleRoomCountBeforeChange = (await homePage.GetRoomsAsync()).Count;
+        await roomListSteps.RefreshRoomListAsync();
+
+        int visibleRoomCountBeforeChange = (await roomListSteps.GetRoomsAsync()).Count;
 
         RoomApiRequest roomToDelete = new RoomApiRequestBuilder().Build();
 
@@ -32,16 +35,14 @@ public class DeleteRoomFixture : BaseFixture
         ApiResponse<object> deleteResponse =
             await RoomApiClient.DeleteRoomAsync(createdRoom.RoomId);
 
-        deleteResponse.ShouldIndicateSuccessfulDeletion();
+        deleteResponse.IsSuccessful.Should().BeTrue();
 
         IReadOnlyCollection<RoomDto> apiRooms = await RoomApiClient.GetRoomsAsync();
 
-        apiRooms.ShouldNotContainRoom(createdRoom.RoomId);
+        apiRooms.Should().NotContain(r => r.RoomId == createdRoom.RoomId);
 
-        await homePage.UpdateRoomList();
+        await roomListSteps.RefreshRoomListAsync();
 
-        IReadOnlyCollection<RoomCardDto> uiRoomsAfterChange = await homePage.GetRoomsAsync();
-
-        uiRoomsAfterChange.ShouldHaveRoomCount(visibleRoomCountBeforeChange);
+        await roomListSteps.ShouldHaveRoomCountAsync(visibleRoomCountBeforeChange);
     }
 }

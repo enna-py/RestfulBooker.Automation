@@ -95,9 +95,7 @@ public sealed class HomePage : BasePage
     public async Task FillBookingDatesAsync(DateOnly checkIn, DateOnly checkOut)
     {
         LoggerManager.Logger.Information(
-            "Entering booking dates: {CheckIn} - {CheckOut}",
-            checkIn,
-            checkOut);
+            "Entering booking dates");
 
         string checkInValue =
             checkIn.ToString("dd/MM/yyyy");

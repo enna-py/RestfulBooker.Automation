@@ -112,7 +112,7 @@ public sealed class EditRoomComponent
     public async Task<AdminRoomDetailsPage> SaveAsync()
     {
         LoggerManager.Logger.Information(
-            "Saving room changes");
+            "Clicking 'Update' button");
 
         // Saving resets the room state (clearing price/image) before an async
         // re-fetch repopulates the read-only summary - wait for that re-fetch

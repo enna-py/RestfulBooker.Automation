@@ -50,11 +50,11 @@ RestfulBooker.Automation
 - **Page Object** — one class per page; locators, navigation, and atomic UI actions only (no assertions).
 - **Component Object** — reusable UI fragments shared across pages (e.g. `RoomCardComponent`, `BookingFormComponent`).
 - **Builder** — fluent, immutable test-data construction for DTOs (e.g. `RoomApiRequestBuilder`, `EditRoomDataBuilder`).
-- **Steps** — business-workflow orchestration across Pages/Components (e.g. `BookingSteps`, `AuthenticationSteps`); no assertions.
+- **Steps** — business-workflow orchestration across Pages/Components (e.g. `BookingSteps`, `AuthenticationSteps`). A Step is the business-level layer for the Page(s) it owns, and may include business-level verification for those Page(s) alongside its actions.
 - **Factory** — request/client construction (`RequestFactory`, `BrowserFactory`).
 - **Fluent API** — UI-mutating methods return `this`; navigation methods return the destination Page Object.
 
-Assertions live only in dedicated Assertion classes (`tests/**/Assertions`) — never inline `Assert.*` calls in test bodies.
+Business-level assertions default to living on the Page Step that owns the corresponding behavior; a separate `tests/**/Assertions` class is the exception. Test bodies never call `Assert.*` directly. Full rules: [.claude/instructions/](.claude/instructions/).
 
 ## Getting Started
 
@@ -189,4 +189,13 @@ Set these in your shell profile or a local, git-ignored `.env`-style script you 
 
 ## Contributing
 
-Architecture, layering, naming, and design-pattern rules are enforced via [CLAUDE.md](CLAUDE.md) for AI-assisted changes — read it before adding new Pages, Components, Builders, or Fixtures, and reuse existing implementations before creating new ones.
+Architecture, layering, naming, and design-pattern rules are documented for both humans and
+AI-assisted changes:
+
+- [CLAUDE.md](CLAUDE.md) — the concise project constitution (always-on rules, layer map, precedence).
+- [.claude/instructions/](.claude/instructions/) — detailed conventions for architecture,
+  coding standards, and testing.
+- [.claude/skills/](.claude/skills/) — task workflows (`jira-test-case`, `ui-automation`).
+
+Read the relevant file before adding new Pages, Components, Builders, or Fixtures, and reuse
+existing implementations before creating new ones.

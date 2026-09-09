@@ -46,8 +46,7 @@ public sealed class BookingFormComponent
     public async Task FillFirstNameAsync(string firstName)
     {
         LoggerManager.Logger.Information(
-            "Entering first name '{FirstName}'",
-            firstName);
+            "Entering first name");
 
         await FirstName.FillAsync(firstName);
     }
@@ -55,8 +54,7 @@ public sealed class BookingFormComponent
     public async Task FillLastNameAsync(string lastName)
     {
         LoggerManager.Logger.Information(
-            "Entering last name '{LastName}'",
-            lastName);
+            "Entering last name");
 
         await LastName.FillAsync(lastName);
     }
@@ -64,8 +62,7 @@ public sealed class BookingFormComponent
     public async Task FillEmailAsync(string email)
     {
         LoggerManager.Logger.Information(
-            "Entering email '{Email}'",
-            email);
+            "Entering email");
 
         await Email.FillAsync(email);
     }
@@ -73,8 +70,7 @@ public sealed class BookingFormComponent
     public async Task FillPhoneAsync(string phone)
     {
         LoggerManager.Logger.Information(
-            "Entering phone '{Phone}'",
-            phone);
+            "Entering phone");
 
         await Phone.FillAsync(phone);
     }

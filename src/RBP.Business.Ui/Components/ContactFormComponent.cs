@@ -54,7 +54,7 @@ public sealed class ContactFormComponent
     public async Task SubmitAsync()
     {
         LoggerManager.Logger.Information(
-            "Submitting contact message");
+            "Clicking 'Submit' button");
 
         var submitResponse = _page.WaitForResponseAsync(r =>
             r.Url.Contains("/api/message") &&

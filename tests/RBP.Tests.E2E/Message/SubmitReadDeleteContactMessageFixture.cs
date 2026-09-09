@@ -1,19 +1,19 @@
-using RBP.Business.Ui.Components;
+using AwesomeAssertions;
 using RBP.Business.Ui.Pages;
 using RBP.Business.Ui.Pages.Admin;
 using RBP.Business.Ui.Steps;
 using RBP.Data.Builders.Message;
 using RBP.Data.DTO.Message;
-using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
+using RestfulBooker.Core.Constants;
 
 namespace RBP.Tests.E2E.Message;
 
 public class SubmitReadDeleteContactMessageFixture : BaseFixture
 {
     [Test]
-    [Category("E2E")]
-    [Category("Regression")]
+    [Category(TestType.E2E)]
+    [Category(TestType.Regression)]
     [Property("JiraKey", "RBP-15")]
     public async Task Contact_Message_Should_Be_Submitted_Read_And_Deleted()
     {
@@ -35,7 +35,7 @@ public class SubmitReadDeleteContactMessageFixture : BaseFixture
 
         await contactMessageSteps.SubmitMessageAsync(request);
 
-        await homePage.ShouldHaveSubmittedContactMessage();
+        await contactMessageSteps.ShouldHaveSubmittedAsync();
 
         IReadOnlyCollection<MessageListItemDto> messagesAfterSubmit =
             await MessageApiClient.GetMessagesAsync();
@@ -46,7 +46,7 @@ public class SubmitReadDeleteContactMessageFixture : BaseFixture
 
         MessageDto apiMessage = await MessageApiClient.GetMessageAsync(submittedMessage.Id);
 
-        apiMessage.ShouldMatch(request);
+        ShouldMatch(apiMessage, request);
 
         AdminLoginPage loginPage = await CreatePage<AdminLoginPage>().OpenAsync();
 
@@ -56,21 +56,33 @@ public class SubmitReadDeleteContactMessageFixture : BaseFixture
 
         AdminMessagesPage messagesPage = await CreatePage<AdminMessagesPage>().OpenAsync();
 
-        MessageDetailComponent messageDetail = await messagesPage.OpenMessageAsync(subject);
+        AdminMessagesSteps adminMessagesSteps = new(messagesPage);
 
-        ContactMessageRequest displayedMessage = await messageDetail.GetDetailsAsync();
+        await adminMessagesSteps.ShouldMatchMessageDetailsAsync(subject, request);
 
-        displayedMessage.ShouldMatch(request);
+        await adminMessagesSteps.DeleteMessageAsync(subject);
 
-        messagesPage = await messageDetail.CloseAsync();
-
-        messagesPage = await messagesPage.DeleteMessageAsync(subject);
-
-        await messagesPage.ShouldNotContainMessage(subject);
+        await adminMessagesSteps.ShouldNotContainMessageAsync(subject);
 
         IReadOnlyCollection<MessageListItemDto> messagesAfterDelete =
             await MessageApiClient.GetMessagesAsync();
 
-        messagesAfterDelete.ShouldNotContainMessage(submittedMessage.Id);
+        messagesAfterDelete.Should().NotContain(m => m.Id == submittedMessage.Id);
+    }
+
+    // API-level integrity check: the message the API actually stored matches what was
+    // submitted. Not a UI outcome, so it doesn't belong on a Page Step - kept as a private
+    // helper here rather than a shared Assertions class, since this is its only consumer.
+    private static void ShouldMatch(MessageDto actual, ContactMessageRequest expected)
+    {
+        actual.Name.Should().Be(expected.Name);
+
+        actual.Email.Should().Be(expected.Email);
+
+        actual.Phone.Should().Be(expected.Phone);
+
+        actual.Subject.Should().Be(expected.Subject);
+
+        actual.Description.Should().Be(expected.Description);
     }
 }

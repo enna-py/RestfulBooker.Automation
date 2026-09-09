@@ -1,19 +1,11 @@
-﻿using AwesomeAssertions;
-using RBP.Business.Ui.Pages;
+﻿using RBP.Business.Ui.Pages;
 using RBP.Data.DTO.Branding;
-using RBP.Data.DTO.Room;
-using RestfulBooker.Data.DTO;
 using static Microsoft.Playwright.Assertions;
 
 namespace RBP.Tests.E2E.Assertions;
 
 public static class HomePageAssertions
 {
-    public static async Task ShouldHaveSubmittedContactMessage(this HomePage page)
-    {
-        await Expect(page.ContactConfirmationMessage).ToBeVisibleAsync();
-    }
-
     public static async Task ShouldDisplayBranding(this HomePage page, BrandingDto expected)
     {
         // The public site's server-side branding fetch revalidates on a fixed
@@ -56,35 +48,5 @@ public static class HomePageAssertions
                 await page.ReloadAsync();
             }
         }
-    }
-
-    public static void ShouldMatchApiRooms(this IReadOnlyCollection<RoomCardDto> uiRooms, IReadOnlyCollection<RoomDto> apiRooms)
-    {
-        uiRooms.Should().NotBeEmpty();
-
-        foreach (RoomCardDto uiRoom in uiRooms)
-        {
-            RoomDto apiRoom = apiRooms.Should()
-                .ContainSingle(x => x.RoomId == uiRoom.Id)
-                .Subject;
-
-            uiRoom.Type.Should().Be(apiRoom.Type);
-
-            uiRoom.Description.Should().Be(apiRoom.Description);
-
-            uiRoom.Image.Should().Be(apiRoom.Image);
-
-            uiRoom.Price.Should().Be(apiRoom.RoomPrice);
-
-            uiRoom.Features.Should()
-                .BeEquivalentTo(apiRoom.Features);
-        }
-    }
-
-    public static void ShouldHaveRoomCount(
-        this IReadOnlyCollection<RoomCardDto> uiRooms,
-        int expectedCount)
-    {
-        uiRooms.Should().HaveCount(expectedCount);
     }
 }

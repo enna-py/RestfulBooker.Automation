@@ -1,4 +1,5 @@
 using RBP.Data.DTO.Booking;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.Builders.Booking;
 using RestfulBooker.Data.DTO.Common;
 using RestfulBooker.Tests.API;
@@ -10,8 +11,8 @@ namespace RestfulBooker.Tests.Smoke.Api.Booking;
 public class PreventDoubleBookingFixture : BaseApiFixture
 {
     [Test]
-    [Category("Smoke")]
-    [Category("API")]
+    [Category(TestType.Smoke)]
+    [Category(TestType.API)]
     [Property("JiraKey", "RBP-10")]
     public async Task Booking_Should_Not_Allow_Overlapping_Dates()
     {

@@ -36,11 +36,7 @@ public sealed class BookingEditComponent
     public async Task<BookingEditComponent> FillAsync(BookingRequest updatedValues)
     {
         LoggerManager.Logger.Information(
-            "Updating booking to '{FirstName} {LastName}', {CheckIn} - {CheckOut}",
-            updatedValues.Guest.FirstName,
-            updatedValues.Guest.LastName,
-            updatedValues.CheckIn,
-            updatedValues.CheckOut);
+            "Filling booking edit form");
 
         await FirstName.FillAsync(updatedValues.Guest.FirstName);
 

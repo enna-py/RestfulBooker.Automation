@@ -1,8 +1,8 @@
 using RBP.Business.Ui.Pages.Admin;
 using RBP.Business.Ui.Steps;
 using RBP.Data.DTO.Booking;
-using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.Builders.Booking;
 using RestfulBooker.Data.Builders.Room;
 using RestfulBooker.Data.DTO;
@@ -14,8 +14,8 @@ namespace RBP.Tests.E2E.Booking;
 public class UpdateBookingFixture : BaseFixture
 {
     [Test]
-    [Category("E2E")]
-    [Category("Regression")]
+    [Category(TestType.E2E)]
+    [Category(TestType.Regression)]
     [Property("JiraKey", "RBP-14")]
     public async Task Booking_Should_Be_Updated_Via_Admin_Panel_And_Reflected_In_Api()
     {
@@ -67,6 +67,6 @@ public class UpdateBookingFixture : BaseFixture
 
         BookingDto actualBooking = await BookingApiClient.GetBookingAsync(bookingId);
 
-        actualBooking.ShouldMatch(updatedValues, bookingId);
+        await bookingManagementSteps.ShouldMatchAsync(actualBooking, updatedValues, bookingId);
     }
 }

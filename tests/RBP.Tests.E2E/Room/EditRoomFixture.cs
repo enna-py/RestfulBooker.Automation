@@ -2,8 +2,8 @@ using RBP.Business.Ui.Pages.Admin;
 using RBP.Business.Ui.Steps;
 using RBP.Data.Builders.Room;
 using RBP.Data.DTO.Room;
-using RBP.Tests.E2E.Assertions;
 using RBP.Tests.E2E.Base;
+using RestfulBooker.Core.Constants;
 using RestfulBooker.Data.Builders.Room;
 using RestfulBooker.Data.DTO;
 using RestfulBooker.Data.DTO.Room;
@@ -13,8 +13,8 @@ namespace RBP.Tests.E2E.Room;
 public class EditRoomFixture : BaseFixture
 {
     [Test]
-    [Category("Regression")]
-    [Category("UI")]
+    [Category(TestType.Regression)]
+    [Category(TestType.UI)]
     [Property("JiraKey", "RBP-13")]
     public async Task Edit_Room_Via_Admin_Panel_Should_Update_Admin_Room_List()
     {
@@ -49,8 +49,6 @@ public class EditRoomFixture : BaseFixture
 
         AdminRoomDetailsPage roomDetails = await roomSteps.EditRoomAsync(roomName, expectedRoom);
 
-        RoomCardDto adminDisplayedRoom = await roomDetails.GetRoomSummaryAsync();
-
-        adminDisplayedRoom.ShouldMatch(expectedRoom);
+        await roomSteps.ShouldMatchAsync(roomDetails, expectedRoom);
     }
 }
