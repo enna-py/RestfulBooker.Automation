@@ -182,9 +182,9 @@ Set these in your shell profile or a local, git-ignored `.env`-style script you 
 | API Clients (Room, Auth, Booking, Message, Branding) | Done |
 | Builders & DTOs | Done |
 | Page Objects / Components / Steps (Public + Admin UI) | Done |
-| API fixtures (`RBP.Tests.Api`) | In progress |
-| UI fixtures (`RBP.Tests.Ui`) | In progress |
-| E2E fixtures (`RBP.Tests.E2E`) — Room, Booking, Branding, Message flows | In progress |
+| API fixtures (`RBP.Tests.Api`) | Done |
+| UI fixtures (`RBP.Tests.Ui`) | Done |
+| E2E fixtures (`RBP.Tests.E2E`) — Room, Booking, Branding, Message flows | Done |
 | CI/CD pipeline | Not yet configured |
 
 ## Contributing
